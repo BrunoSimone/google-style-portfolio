@@ -2,11 +2,17 @@
   "name": "google-style-portfolio",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@10.11.0",
+  "engines": {
+    "npm": "please-use-pnpm",
+    "yarn": "please-use-pnpm"
+  },
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "preinstall": "npx only-allow pnpm",
+    "dev": "pnpm exec next dev --turbopack",
+    "build": "pnpm exec next build",
+    "start": "pnpm exec next start",
+    "lint": "pnpm exec next lint"
   },
   "dependencies": {
     "@radix-ui/react-dropdown-menu": "^2.1.15",
