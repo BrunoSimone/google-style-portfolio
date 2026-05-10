@@ -1,36 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# google-style-portfolio
+
+Personal portfolio disguised as a Google Search experience. Search for me, browse results, read my Wikipedia article — all within a pixel-perfect recreation of Google's UI.
+
+## Live Demo
+
+[**google-me.vercel.app**](https://google-me.vercel.app)
+
+## What's inside
+
+- **Google Home** — Search bar that leads to results about me
+- **Search Results** — Real-looking results linking to LinkedIn, GitHub, Wikipedia, and WeCheck AI
+- **Knowledge Panel** — Sidebar with bio, links, and photo
+- **People Also Ask** — Expandable FAQ section
+- **Projects Tab** — Portfolio projects styled as search results
+- **Contact Tab** — Quick access to email, phone, LinkedIn, GitHub
+- **Wikipedia Page** — Full article page mimicking Wikipedia's layout with career, skills, and education
+- **i18n** — Fully translated in Spanish and English, switchable in real-time
+
+## Tech Stack
+
+- **Next.js 15** (App Router + Turbopack)
+- **React 19**
+- **TypeScript**
+- **Tailwind CSS v4**
+- **shadcn/ui**
+
+## Project Structure
+
+```
+src/
+├── app/            # Routes (/, /search, /wiki)
+├── components/     # Reusable UI components
+├── data/           # Static data (URLs, skills, structure)
+│   ├── bruno.ts    # Personal info + search/project base data
+│   └── palette.ts  # Brand colors
+├── i18n/           # Internationalization
+│   ├── es.ts       # Spanish translations
+│   ├── en.ts       # English translations
+│   ├── translations.ts
+│   └── context.tsx # React context + useLanguage hook
+└── lib/            # Utilities
+```
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Run development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Build for production
+npm run build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Architecture Decisions
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **All visible text lives in i18n files** — `es.ts` and `en.ts` are the single source of truth for any user-facing string
+- **Data layer is pure** — `bruno.ts` contains only static, language-independent data (URLs, favicon configs, skill lists)
+- **Colors are centralized** — `palette.ts` holds all brand colors used across search results and contact cards
+- **File-system routing** — Each page maps directly to a URL segment (`/search`, `/wiki`)
+- **No external CMS or API** — Everything is static and pre-rendered for instant load times
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## License
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+MIT
