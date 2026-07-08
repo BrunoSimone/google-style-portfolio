@@ -1,14 +1,14 @@
 # google-style-portfolio
 
-Personal portfolio disguised as a Google Search experience. Search for me, browse results, read my Wikipedia article — all within a pixel-perfect recreation of Google's UI.
+Personal portfolio disguised as a Google Search experience. Search for me, browse results, read my Wikipedia article, all within a pixel-perfect recreation of Google's UI.
 
 ## Live Demo
 
-[**google-me.vercel.app**](https://google-style-portfolio.vercel.app/)
+[**brunosimone.dev**](https://www.brunosimone.dev)
 
 ## Stack
 
-- **Next.js 15** (App Router + Turbopack)
+- **Next.js 16** (App Router + Turbopack)
 - **React 19**
 - **TypeScript**
 - **Tailwind CSS v4**
@@ -18,7 +18,7 @@ Personal portfolio disguised as a Google Search experience. Search for me, brows
 
 ```
 src/
-├── app/            # Routes (/, /search, /wiki)
+├── app/            # Routes (/, /search, /wiki, /case/[slug])
 ├── components/     # Reusable UI components
 ├── data/           # Static data (URLs, skills, structure)
 │   ├── bruno.ts    # Personal info + search/project base data
