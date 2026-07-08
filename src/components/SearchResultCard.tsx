@@ -1,5 +1,6 @@
 import { MoreVertical } from "lucide-react";
 import type { SearchResult } from "@/data/bruno";
+import { isExternalUrl } from "@/lib/utils";
 
 export function SearchResultCard({
   faviconColor,
@@ -38,7 +39,13 @@ export function SearchResultCard({
         </div>
         <MoreVertical className="size-5 text-content-tertiary shrink-0 cursor-pointer" />
       </div>
-      <a href={url} className="block">
+      <a
+        href={url}
+        className="block"
+        {...(isExternalUrl(url)
+          ? { target: "_blank", rel: "noopener noreferrer" }
+          : {})}
+      >
         <h3 className="text-xl text-link hover:underline leading-snug cursor-pointer">
           {title}
         </h3>

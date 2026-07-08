@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { Search, Menu } from "lucide-react";
+import { useState } from "react";
+import { Search, Menu, ChevronDown } from "lucide-react";
 import { bruno, skills } from "@/data/bruno";
 import { useLanguage } from "@/i18n/context";
 import { LanguageToggle } from "@/components/LanguageToggle";
@@ -65,7 +66,7 @@ function Infobox() {
   const { t } = useLanguage();
 
   return (
-    <table className="float-right ml-6 mb-4 w-[280px] border border-[#a2a9b1] text-[13px] bg-[#f8f9fa] font-sans border-collapse">
+    <table className="w-full mb-4 md:float-right md:ml-6 md:w-[280px] border border-[#a2a9b1] text-[13px] bg-[#f8f9fa] font-sans border-collapse">
       <thead>
         <tr>
           <th
@@ -79,7 +80,7 @@ function Infobox() {
       <tbody>
         <tr>
           <td colSpan={2} className="text-center py-2 bg-[#e8e8e8] border border-[#a2a9b1]">
-            <div className="w-[200px] h-[250px] mx-auto relative overflow-hidden">
+            <div className="w-[200px] h-[218px] mx-auto relative overflow-hidden">
               <Image
                 src="/bruno.jpeg"
                 alt={bruno.name}
@@ -95,7 +96,7 @@ function Infobox() {
         <InfoRow label={t.wiki.company} value={bruno.company} />
         <InfoRow label={t.wiki.educationLabel} value={bruno.education} />
         <InfoRow label={t.wiki.yearsActive} value="2023 –" />
-        <InfoRow label={t.wiki.languages} value={bruno.languages.join(", ")} />
+        <InfoRow label={t.wiki.languages} value={t.wiki.languagesValue} />
         <tr>
           <td className="border border-[#a2a9b1] px-3 py-1.5 font-bold align-top bg-[#f8f9fa]">
             {t.wiki.website}
@@ -103,6 +104,8 @@ function Infobox() {
           <td className="border border-[#a2a9b1] px-3 py-1.5">
             <a
               href={bruno.github.url}
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-wiki-blue hover:underline break-all"
             >
               {bruno.github.display}
@@ -174,6 +177,45 @@ function LeftSidebar() {
   );
 }
 
+function MobileToc() {
+  const { t } = useLanguage();
+  const [open, setOpen] = useState(false);
+
+  const toc = [
+    { id: "carrera", label: t.wiki.career },
+    { id: "habilidades", label: t.wiki.skills },
+    { id: "educacion", label: t.wiki.education },
+    { id: "enlaces", label: t.wiki.externalLinks },
+  ];
+
+  return (
+    <div className="lg:hidden border border-[#a2a9b1] bg-[#f8f9fa] rounded-[2px] mb-4">
+      <button
+        onClick={() => setOpen((v) => !v)}
+        className="flex items-center justify-between w-full px-3 py-2.5"
+      >
+        <span className="text-sm font-bold text-[#202122]">{t.wiki.contents}</span>
+        <ChevronDown
+          className={`size-4 text-[#54595d] transition-transform ${
+            open ? "rotate-180" : ""
+          }`}
+        />
+      </button>
+      {open && (
+        <ul className="px-3 pb-3 pt-2.5 flex flex-col gap-2 border-t border-[#c8ccd1]">
+          {toc.map((item) => (
+            <li key={item.id}>
+              <a href={`#${item.id}`} className="text-[13px] text-wiki-blue">
+                {item.label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
 export default function WikiPage() {
   const { t } = useLanguage();
 
@@ -218,6 +260,8 @@ export default function WikiPage() {
             {t.wiki.fromWikipedia}
           </p>
 
+          <MobileToc />
+
           <div className="font-serif text-[14px] leading-[1.6]">
             <Infobox />
 
@@ -236,30 +280,32 @@ export default function WikiPage() {
             <p className="mb-3">{t.wiki.careerPromotion}</p>
 
             <SectionHeader id="habilidades" title={t.wiki.skills} />
-            <table className="w-full border-collapse text-[13px] font-sans mb-6">
-              <thead>
-                <tr className="bg-[#eaecf0]">
-                  <th className="border border-[#a2a9b1] px-3 py-2 text-left w-1/4">
-                    {t.wiki.category}
-                  </th>
-                  <th className="border border-[#a2a9b1] px-3 py-2 text-left">
-                    {t.wiki.technologies}
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {Object.entries(skills).map(([key, values]) => (
-                  <tr key={key}>
-                    <td className="border border-[#a2a9b1] px-3 py-2 font-bold bg-[#f8f9fa]">
-                      {(t.wiki.skillCategories as Record<string, string>)[key] ?? key}
-                    </td>
-                    <td className="border border-[#a2a9b1] px-3 py-2">
-                      {values.join(", ")}
-                    </td>
+            <div className="overflow-x-auto mb-6">
+              <table className="w-full border-collapse text-[13px] font-sans min-w-[420px]">
+                <thead>
+                  <tr className="bg-[#eaecf0]">
+                    <th className="border border-[#a2a9b1] px-3 py-2 text-left w-1/4">
+                      {t.wiki.category}
+                    </th>
+                    <th className="border border-[#a2a9b1] px-3 py-2 text-left">
+                      {t.wiki.technologies}
+                    </th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {Object.entries(skills).map(([key, values]) => (
+                    <tr key={key}>
+                      <td className="border border-[#a2a9b1] px-3 py-2 font-bold bg-[#f8f9fa]">
+                        {(t.wiki.skillCategories as Record<string, string>)[key] ?? key}
+                      </td>
+                      <td className="border border-[#a2a9b1] px-3 py-2">
+                        {values.join(", ")}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
             <SectionHeader id="educacion" title={t.wiki.education} />
             <ul className="list-disc ml-6 space-y-2 mb-6">

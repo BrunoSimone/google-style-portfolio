@@ -1,5 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
+import { Download } from "lucide-react";
 import type { KnowledgePanelInfo } from "@/data/bruno";
 
 interface KnowledgePanelProps {
@@ -11,6 +12,30 @@ interface KnowledgePanelProps {
   info: KnowledgePanelInfo[];
   photo?: string;
   sourcePrefixLabel?: string;
+  cvHref: string;
+  downloadCvLabel: string;
+  cvFileName?: string;
+}
+
+function CvButton({
+  href,
+  label,
+  fileName,
+}: {
+  href: string;
+  label: string;
+  fileName?: string;
+}) {
+  return (
+    <a
+      href={href}
+      download={fileName ?? true}
+      className="flex items-center justify-center gap-2 rounded-lg bg-[#1a73e8] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-[#1b66c9]"
+    >
+      <Download className="size-[17px]" />
+      {label}
+    </a>
+  );
 }
 
 export function KnowledgePanel({
@@ -22,12 +47,15 @@ export function KnowledgePanel({
   info,
   photo,
   sourcePrefixLabel = "Fuente:",
+  cvHref,
+  downloadCvLabel,
+  cvFileName,
 }: KnowledgePanelProps) {
   return (
     <div className="border border-surface-border rounded-lg overflow-hidden">
       {photo && (
         <div className="p-5 pb-0">
-          <div className="w-full aspect-square max-h-[280px] rounded-lg overflow-hidden relative">
+          <div className="w-full aspect-[4/5] max-h-[330px] rounded-lg overflow-hidden relative">
             <Image
               src={photo}
               alt={name}
@@ -44,6 +72,10 @@ export function KnowledgePanel({
           {name}
         </h2>
         <p className="text-sm text-content-secondary mt-0.5">{subtitle}</p>
+      </div>
+
+      <div className="p-5 pb-0 pt-4">
+        <CvButton href={cvHref} label={downloadCvLabel} fileName={cvFileName} />
       </div>
 
       <div className="p-5 pt-4">
@@ -80,6 +112,59 @@ export function KnowledgePanel({
           </div>
         ))}
       </div>
+    </div>
+  );
+}
+
+interface KnowledgePanelMobileProps {
+  name: string;
+  subtitle: string;
+  photo: string;
+  seeMoreLabel: string;
+  seeMoreUrl: string;
+  cvHref: string;
+  downloadCvLabel: string;
+  cvFileName?: string;
+}
+
+/** Condensed knowledge card shown ABOVE the results on mobile. */
+export function KnowledgePanelMobile({
+  name,
+  subtitle,
+  photo,
+  seeMoreLabel,
+  seeMoreUrl,
+  cvHref,
+  downloadCvLabel,
+  cvFileName,
+}: KnowledgePanelMobileProps) {
+  return (
+    <div className="border border-surface-border rounded-xl overflow-hidden mb-6 lg:hidden">
+      <div className="flex gap-3.5 p-3.5">
+        <div className="relative size-[74px] rounded-[10px] overflow-hidden shrink-0">
+          <Image src={photo} alt={name} fill className="object-cover object-top" />
+        </div>
+        <div className="min-w-0">
+          <h2 className="text-xl font-normal text-content-primary leading-tight">
+            {name}
+          </h2>
+          <p className="text-[13px] text-content-secondary mt-0.5">{subtitle}</p>
+          <Link
+            href={seeMoreUrl}
+            className="inline-block mt-1.5 text-xs text-link hover:underline"
+          >
+            {seeMoreLabel} ›
+          </Link>
+        </div>
+      </div>
+      <a
+        href={cvHref}
+        download={cvFileName ?? true}
+        className="flex items-center justify-center gap-2 border-t border-surface-border bg-[#1a73e8] p-3 text-sm font-semibold text-white transition-colors hover:bg-[#1b66c9]"
+      >
+        <Download className="size-4" />
+        {downloadCvLabel}
+      </a>
     </div>
   );
 }

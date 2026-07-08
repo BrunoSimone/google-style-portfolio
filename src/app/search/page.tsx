@@ -5,16 +5,24 @@ import { Suspense, useState } from "react";
 import { GoogleLogo } from "@/components/GoogleLogo";
 import { SearchBar } from "@/components/SearchBar";
 import { SearchResultCard } from "@/components/SearchResultCard";
-import { KnowledgePanel } from "@/components/KnowledgePanel";
+import { ProjectCard } from "@/components/ProjectCard";
+import { ExperienceCard } from "@/components/ExperienceCard";
+import type { ExperienceCardData } from "@/components/ExperienceCard";
+import { KnowledgePanel, KnowledgePanelMobile } from "@/components/KnowledgePanel";
 import { PeopleAlsoAsk } from "@/components/PeopleAlsoAsk";
 import { LanguageToggle } from "@/components/LanguageToggle";
 import { useLanguage } from "@/i18n/context";
-import { bruno, searchResultsBase, projectsBase } from "@/data/bruno";
+import {
+  bruno,
+  searchResultsBase,
+  projectsBase,
+  experienceBase,
+} from "@/data/bruno";
 import { brandColors } from "@/data/palette";
 import type { SearchResult, Project, ContactMethod, KnowledgePanelInfo } from "@/data/bruno";
-import { Copy, Check } from "lucide-react";
+import { Copy, Check, Download } from "lucide-react";
 
-type Tab = "all" | "projects" | "contact";
+type Tab = "all" | "experience" | "projects" | "contact";
 
 function SearchContent() {
   const searchParams = useSearchParams();
@@ -29,6 +37,7 @@ function SearchContent() {
 
   const tabs: { key: Tab; label: string }[] = [
     { key: "all", label: t.tabs.all },
+    { key: "experience", label: t.tabs.experience },
     { key: "projects", label: t.tabs.projects },
     { key: "contact", label: t.tabs.contact },
   ];
@@ -46,9 +55,9 @@ function SearchContent() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <header className="sticky top-0 bg-white z-40 border-b border-surface-border">
-        <div className="flex items-center gap-7 pl-6 md:pl-[52px] pr-[30px] pt-[24px] pb-[16px]">
+        <div className="flex items-center gap-4 md:gap-7 pl-4 md:pl-[52px] pr-4 md:pr-[30px] pt-4 md:pt-[24px] pb-3 md:pb-[16px]">
           <GoogleLogo size="sm" />
-          <div className="flex-1 max-w-[692px]">
+          <div className="flex-1 max-w-[692px] min-w-0">
             <SearchBar variant="header" defaultValue={query} />
           </div>
           <div className="flex items-center gap-3 ml-auto">
@@ -58,12 +67,12 @@ function SearchContent() {
             </button>
           </div>
         </div>
-        <nav className="flex items-center ml-4 md:ml-[182px]">
+        <nav className="flex items-center ml-2 md:ml-[182px] overflow-x-auto">
           {tabs.map((tab) => (
             <button
               key={tab.key}
               onClick={() => handleTabChange(tab.key)}
-              className={`px-4 pb-3 pt-3 text-[13px] border-b-[2px] transition-colors cursor-pointer ${
+              className={`px-4 pb-3 pt-3 text-[13px] border-b-[2px] transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
                 activeTab === tab.key
                   ? "border-google-blue text-google-blue font-medium"
                   : "border-transparent text-content-tertiary hover:text-content-primary"
@@ -94,12 +103,16 @@ function SearchContent() {
             </a>
             <a
               href="https://www.linkedin.com/in/bruno-daniel-simone/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:underline"
             >
               LinkedIn
             </a>
             <a
               href="https://github.com/BrunoSimone"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:underline"
             >
               GitHub
@@ -126,6 +139,8 @@ function TabContent({ activeTab }: { activeTab: Tab }) {
   switch (activeTab) {
     case "all":
       return <AllTab />;
+    case "experience":
+      return <ExperienceTab />;
     case "projects":
       return <ProjectsTab />;
     case "contact":
@@ -167,6 +182,18 @@ function AllTab() {
           .replace("{count}", "4")
           .replace("{time}", "0.42")}
       </p>
+
+      <KnowledgePanelMobile
+        name={knowledgePanel.name}
+        subtitle={knowledgePanel.subtitle}
+        photo="/bruno.jpeg"
+        seeMoreLabel={t.panel.seeMore}
+        seeMoreUrl="/wiki"
+        cvHref={t.cv.href}
+        downloadCvLabel={t.panel.downloadCv}
+        cvFileName={t.cv.fileName}
+      />
+
       <div className="flex gap-[60px]">
         <div className="flex-1 flex flex-col gap-7 min-w-0 max-w-[652px]">
           {searchResults.slice(0, 3).map((result, i) => (
@@ -185,8 +212,33 @@ function AllTab() {
             {...knowledgePanel}
             photo="/bruno.jpeg"
             sourcePrefixLabel={t.panel.source}
+            cvHref={t.cv.href}
+            downloadCvLabel={t.panel.downloadCv}
+            cvFileName={t.cv.fileName}
           />
         </aside>
+      </div>
+    </>
+  );
+}
+
+function ExperienceTab() {
+  const { t } = useLanguage();
+
+  const experience: ExperienceCardData[] = experienceBase.map((base, i) => ({
+    ...base,
+    ...t.experienceCards[i],
+  }));
+
+  return (
+    <>
+      <p className="text-[13px] text-content-secondary mb-5">
+        {t.search.expCount}
+      </p>
+      <div className="flex flex-col gap-[30px] max-w-[652px]">
+        {experience.map((item, i) => (
+          <ExperienceCard key={i} item={item} />
+        ))}
       </div>
     </>
   );
@@ -199,6 +251,7 @@ function ProjectsTab() {
     ...base,
     title: t.projects[i].title,
     description: t.projects[i].description,
+    placeholder: t.projects[i].placeholder,
   }));
 
   return (
@@ -206,21 +259,9 @@ function ProjectsTab() {
       <p className="text-[13px] text-content-secondary mb-5">
         {t.search.projectsFound.replace("{count}", String(projects.length))}
       </p>
-      <div className="flex flex-col gap-7 max-w-[652px]">
+      <div className="flex flex-col gap-[30px] max-w-[668px]">
         {projects.map((project, i) => (
-          <div key={i}>
-            <SearchResultCard {...project} />
-            <div className="flex gap-2 mt-2 flex-wrap">
-              {project.tags.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-xs px-2.5 py-1 rounded-full bg-surface border border-surface-border text-content-secondary"
-                >
-                  {tag}
-                </span>
-              ))}
-            </div>
-          </div>
+          <ProjectCard key={i} project={project} />
         ))}
       </div>
     </>
@@ -346,6 +387,27 @@ function ContactTab() {
             </a>
           )
         )}
+
+        <a
+          href={t.cv.href}
+          download={t.cv.fileName}
+          className="flex items-center gap-4 p-4 rounded-xl border border-surface-border hover:shadow-md transition-shadow"
+        >
+          <div className="size-10 rounded-full flex items-center justify-center text-white shrink-0 bg-[#1a73e8]">
+            <Download className="size-5" />
+          </div>
+          <div className="flex flex-col min-w-0">
+            <span className="text-sm text-content-tertiary">
+              {t.contact.cvLabel}
+            </span>
+            <span className="text-base text-link truncate">
+              {t.cv.fileName}
+            </span>
+          </div>
+          <span className="ml-auto shrink-0 flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#1a73e8] text-white text-[13px] font-semibold">
+            {t.panel.downloadCv}
+          </span>
+        </a>
       </div>
     </>
   );

@@ -31,7 +31,7 @@ export default function Home() {
 
       <main className="flex-1 flex flex-col items-center px-4 pt-28 md:pt-36 gap-6">
         <div className="text-center flex flex-col items-center gap-1">
-          <GoogleLogo size="lg" />
+          <GoogleLogo size="lg" animate />
           <p className="text-content-secondary text-lg">{t.home.subtitle}</p>
         </div>
 
@@ -68,12 +68,16 @@ export default function Home() {
             </a>
             <a
               href="https://www.linkedin.com/in/bruno-daniel-simone/"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:underline"
             >
               LinkedIn
             </a>
             <a
               href="https://github.com/BrunoSimone"
+              target="_blank"
+              rel="noopener noreferrer"
               className="hover:underline"
             >
               GitHub
