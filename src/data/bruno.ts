@@ -5,7 +5,6 @@ export const bruno = {
   shortName: "Bruno Simone",
   location: "Mar del Plata, Argentina",
   email: "brunosimone.mdq@gmail.com",
-  phone: "+54 223 616 1356",
   linkedin: {
     url: "https://www.linkedin.com/in/bruno-daniel-simone/",
     display: "linkedin.com/in/bruno-daniel-simone",
@@ -217,7 +216,7 @@ export const skills = {
     "API Gateways",
   ],
   testing: ["Jest", "React Testing Library"],
-  databases: ["MongoDB", "PostgreSQL", "Supabase", "Firebase"],
+  databases: ["MongoDB", "PostgreSQL", "Supabase"],
   observability: ["Sentry", "PostHog", "Langfuse"],
   cloud: [
     "AWS",
@@ -227,7 +226,14 @@ export const skills = {
     "CI/CD",
     "Vercel",
   ],
-  ai: ["Vercel AI SDK", "Langfuse", "Integraciones con LLMs"],
+  ai: [
+    "Vercel AI SDK",
+    "RAG",
+    "embeddings",
+    "pgvector",
+    "Langfuse",
+    "Integraciones con LLMs",
+  ],
   tools: ["Git", "GitHub"],
   methodologies: ["Agile", "Scrum", "Code Reviews"],
 };

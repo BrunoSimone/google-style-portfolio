@@ -4,7 +4,6 @@ export const brandColors = {
   wikipedia: "#636363",
   wecheck: "#5865F2",
   email: "#EA4335",
-  phone: "#34A853",
   portfolio: "#4285F4",
   ai: "#5865F2",
   pdf: "#EA4335",

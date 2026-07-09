@@ -26,7 +26,14 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     const saved = localStorage.getItem("portfolio-locale");
-    if (saved === "en" || saved === "es") setLocale(saved);
+    if (saved === "en" || saved === "es") {
+      setLocale(saved);
+      return;
+    }
+    // First visit with no saved choice: match the visitor's browser language
+    // so a recruiter lands in their own language (Spanish, or English otherwise).
+    const browser = navigator.language.toLowerCase();
+    setLocale(browser.startsWith("es") ? "es" : "en");
   }, []);
 
   const handleSetLocale = (newLocale: Locale) => {

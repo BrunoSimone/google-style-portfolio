@@ -55,14 +55,14 @@ function SearchContent() {
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <header className="sticky top-0 bg-white z-40 border-b border-surface-border">
-        <div className="flex items-center gap-4 md:gap-7 pl-4 md:pl-[52px] pr-4 md:pr-[30px] pt-4 md:pt-[24px] pb-3 md:pb-[16px]">
+        <div className="flex flex-wrap items-center gap-x-4 md:gap-7 gap-y-3 pl-4 md:pl-[52px] pr-4 md:pr-[30px] pt-4 md:pt-[24px] pb-3 md:pb-[16px]">
           <GoogleLogo size="sm" />
-          <div className="flex-1 max-w-[692px] min-w-0">
+          <div className="order-last sm:order-none w-full sm:w-auto sm:flex-1 sm:max-w-[692px] min-w-0">
             <SearchBar variant="header" defaultValue={query} />
           </div>
           <div className="flex items-center gap-3 ml-auto">
             <LanguageToggle />
-            <button className="size-8 rounded-full bg-google-blue text-white flex items-center justify-center text-sm font-medium shrink-0">
+            <button className="size-8 rounded-full bg-google-blue text-white hidden sm:flex items-center justify-center text-sm font-medium shrink-0">
               B
             </button>
           </div>
@@ -307,13 +307,6 @@ function ContactTab() {
       label: "Email",
       value: bruno.email,
       color: brandColors.email,
-      copyable: true,
-    },
-    {
-      icon: "☎",
-      label: t.contact.phone,
-      value: bruno.phone,
-      color: brandColors.phone,
       copyable: true,
     },
     {

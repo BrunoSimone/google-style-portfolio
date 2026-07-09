@@ -1,6 +1,6 @@
 export const es = {
   home: {
-    subtitle: "Desarrollador de Software",
+    subtitle: "Desarrollador Full-Stack",
     searchPlaceholder: "Buscá en el portfolio",
     googleSearch: "Buscar con Google",
     feelingLucky: "Voy a tener suerte",
@@ -52,7 +52,6 @@ export const es = {
     private: "Repositorio privado",
   },
   contact: {
-    phone: "Teléfono",
     cvLabel: "CV",
   },
   case: {
@@ -117,7 +116,7 @@ export const es = {
     {
       question: "¿Cómo contactar a Bruno Simone?",
       answer:
-        "Podés contactarme a través de mi perfil de LinkedIn (linkedin.com/in/bruno-daniel-simone), por email a brunosimone.mdq@gmail.com, o por teléfono al +54 223 616 1356.",
+        "Podés contactarme a través de mi perfil de LinkedIn (linkedin.com/in/bruno-daniel-simone) o por email a brunosimone.mdq@gmail.com.",
     },
   ],
   projects: [

@@ -1,6 +1,6 @@
 export const en = {
   home: {
-    subtitle: "Software Developer",
+    subtitle: "Full-Stack Developer",
     searchPlaceholder: "Search in portfolio",
     googleSearch: "Google Search",
     feelingLucky: "I'm Feeling Lucky",
@@ -39,7 +39,7 @@ export const en = {
     occupationValue: "Full-Stack Developer",
     company: "Company",
     education: "Education",
-    educationValue: "UTN, Programming Degree (in progress)",
+    educationValue: "UTN, Associate Degree in Computer Programming (in progress)",
     downloadCv: "Download CV",
     seeMore: "See more on Wikipedia",
   },
@@ -52,7 +52,6 @@ export const en = {
     private: "Private repository",
   },
   contact: {
-    phone: "Phone",
     cvLabel: "CV",
   },
   case: {
@@ -117,7 +116,7 @@ export const en = {
     {
       question: "How to contact Bruno Simone?",
       answer:
-        "You can reach me through my LinkedIn profile (linkedin.com/in/bruno-daniel-simone), by email at brunosimone.mdq@gmail.com, or by phone at +54 223 616 1356.",
+        "You can reach me through my LinkedIn profile (linkedin.com/in/bruno-daniel-simone) or by email at brunosimone.mdq@gmail.com.",
     },
   ],
   projects: [
@@ -296,7 +295,7 @@ export const en = {
     careerPromotion:
       "His key achievements include: reducing processing times and operational costs by over 50% in an internal AI microservice by integrating Vercel AI SDK and Langfuse; designing and implementing an automatic PDF generation service with Express and react-pdf; integrating third-party services such as Stripe, Persona, SSO providers, and AWS services (S3, SNS, Secrets Manager, Amazon Rekognition, IAM); and implementing tracing with Sentry, PostHog, and Langfuse. Alongside this he builds JubiGestor, an AI (RAG) assistant for pension procedures.",
     eduUtn:
-      "Universidad Tecnológica Nacional (UTN), Programming Degree (Feb 2026 – Present)",
+      "Universidad Tecnológica Nacional (UTN), Associate Degree in Computer Programming (Feb 2026 – Present)",
     eduHighSchool:
       "Escuela Secundaria N° 3, High School in Economics (2013 – 2019)",
     skillCategories: {

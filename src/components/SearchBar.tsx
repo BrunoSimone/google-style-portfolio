@@ -114,7 +114,7 @@ export function SearchBar({
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder={isHome ? t.home.searchPlaceholder : ""}
-          className="flex-1 outline-none text-[16px] text-content-primary bg-transparent"
+          className="flex-1 min-w-0 outline-none text-[16px] text-content-primary bg-transparent"
           autoComplete="off"
           spellCheck={false}
         />

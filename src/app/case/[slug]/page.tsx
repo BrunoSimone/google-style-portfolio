@@ -26,7 +26,10 @@ function CaseHeader({ backLabel }: { backLabel: string }) {
         </Link>
         <div className="flex-1" />
         <LanguageToggle />
-        <Link href="/search?tab=projects" className="text-[13px] text-wiki-blue hover:underline shrink-0">
+        <Link
+          href="/search?tab=projects"
+          className="hidden sm:inline-block text-[13px] text-wiki-blue hover:underline shrink-0"
+        >
           {backLabel}
         </Link>
       </div>

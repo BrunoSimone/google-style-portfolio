@@ -226,7 +226,7 @@ export default function WikiPage() {
       <div className="max-w-[1600px] mx-auto px-4 flex">
         <LeftSidebar />
 
-        <main className="flex-1 max-w-[960px] py-4 pl-0 lg:pl-6">
+        <main className="flex-1 min-w-0 max-w-[960px] py-4 pl-0 lg:pl-6">
           <h1 className="text-[28px] font-serif font-normal border-b border-[#a2a9b1] pb-1 mb-0">
             Bruno Simone
           </h1>
