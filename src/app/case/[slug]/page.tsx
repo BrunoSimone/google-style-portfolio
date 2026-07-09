@@ -73,7 +73,6 @@ export default function CaseStudyPage() {
     { label: t.case.infobox.stack, value: study.stack, color: "#202122" },
     { label: t.case.infobox.status, value: study.status, color: study.statusColor },
     { label: t.case.infobox.role, value: study.role, color: "#202122" },
-    { label: t.case.infobox.year, value: study.year, color: "#202122" },
   ];
 
   return (
@@ -111,35 +110,26 @@ export default function CaseStudyPage() {
             <SectionHeader n={3} title={t.case.solutionTitle} />
             <p className="mb-3">{study.solution}</p>
             <div className="border border-surface-border rounded-[10px] overflow-hidden my-3.5 bg-white font-sans">
-              <div
-                className="h-[200px] relative flex flex-col items-center justify-center gap-2"
-                style={{ backgroundImage: HATCH }}
-              >
-                <ImageIcon className="size-6 text-content-tertiary" strokeWidth={1.6} />
-                <span className="font-mono text-[10px] text-content-tertiary">
-                  {study.solutionImage}
-                </span>
-              </div>
-            </div>
-
-            <SectionHeader n={4} title={t.case.impactTitle} />
-            <div className="flex gap-3 flex-wrap font-sans my-2.5">
-              {study.metrics.map((m, i) => (
+              {project?.imageSrc ? (
+                <Image
+                  src={project.imageSrc}
+                  alt={study.solutionImage}
+                  width={1024}
+                  height={576}
+                  className="w-full h-auto"
+                />
+              ) : (
                 <div
-                  key={i}
-                  className="flex-1 min-w-[120px] border border-surface-border rounded-[10px] p-3.5 bg-surface"
+                  className="h-[200px] relative flex flex-col items-center justify-center gap-2"
+                  style={{ backgroundImage: HATCH }}
                 >
-                  <div
-                    className="text-[26px] font-bold font-display leading-none"
-                    style={{ color: m.color }}
-                  >
-                    {m.value}
-                  </div>
-                  <div className="text-xs text-content-secondary mt-1.5">{m.label}</div>
+                  <ImageIcon className="size-6 text-content-tertiary" strokeWidth={1.6} />
+                  <span className="font-mono text-[10px] text-content-tertiary">
+                    {study.solutionImage}
+                  </span>
                 </div>
-              ))}
+              )}
             </div>
-            <p className="mb-3">{study.impact}</p>
           </div>
 
           <aside className="w-[280px] shrink-0 font-sans">

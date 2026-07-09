@@ -60,7 +60,6 @@ export const es = {
     problemTitle: "Problema",
     decisionsTitle: "Decisiones de diseño",
     solutionTitle: "Solución",
-    impactTitle: "Impacto",
     linkDemo: "Demo en vivo",
     linkRepo: "Código en GitHub",
     notFound: "Caso de estudio no encontrado.",
@@ -69,7 +68,6 @@ export const es = {
       stack: "Stack",
       status: "Estado",
       role: "Rol",
-      year: "Año",
     },
   },
   footer: {
@@ -161,14 +159,14 @@ export const es = {
       logo: "/jubigestor-logo.svg",
       type: "Aplicación web · IA (RAG)",
       role: "Diseño + Desarrollo",
-      status: "En desarrollo",
-      statusColor: "#1a73e8",
+      status: "En producción",
+      statusColor: "#1e7e42",
       stack: "FastAPI, Gemini, pgvector, Next.js",
-      year: "2026",
       lede: "JubiGestor es un asistente conversacional que responde preguntas sobre jubilaciones en Argentina en lenguaje claro, citando siempre documentación oficial de ANSES.",
       problem:
-        "La información sobre trámites jubilatorios está dispersa en documentos densos y difíciles de interpretar. El desafío era responder consultas concretas en lenguaje claro sin inventar información, un riesgo real en un dominio sensible como el previsional.",
+        "La información sobre trámites jubilatorios está dispersa en documentos densos y difíciles de interpretar. El desafío era responder consultas concretas en lenguaje claro sin inventar información, un riesgo real en un dominio sensible como el previsional. Además, el público objetivo son adultos mayores (jubilados o próximos a jubilarse) con baja alfabetización digital y, en muchos casos, dificultades para ver o escribir, por lo que lograr una buena accesibilidad era un objetivo central.",
       decisions: [
+        "Accesibilidad como prioridad: interacción por voz (micrófono), varios tamaños de texto según lo que necesite cada persona, alto contraste y una UX simple y fácil de comprender, pensada para adultos mayores con baja alfabetización digital.",
         "Arquitectura RAG: recuperar los fragmentos relevantes del corpus oficial antes de generar, para fundamentar cada respuesta en fuentes reales.",
         "Anti-alucinación: si ningún fragmento supera el umbral de similitud, el modelo deriva a ANSES en lugar de inventar.",
         "Backend en FastAPI con Gemini (generación + embeddings) y PostgreSQL + pgvector para la búsqueda vectorial.",
@@ -178,13 +176,6 @@ export const es = {
       solution:
         "El usuario hace una pregunta; el sistema embebe la consulta, busca los fragmentos más cercanos en pgvector y arma el contexto con sus citas. Gemini genera la respuesta en streaming, fundamentada y con enlaces a la documentación oficial. Si no hay contexto suficiente, deriva a ANSES en lugar de arriesgar un dato incorrecto.",
       solutionImage: "chat con respuesta + citas · 16:9",
-      impact:
-        "Convierte documentación previsional densa en respuestas claras y trazables: cada dato es verificable en su fuente, reduciendo la incertidumbre de un trámite jubilatorio sin sacrificar rigor.",
-      metrics: [
-        { value: "768", label: "dimensiones de embedding (Gemini, MRL)", color: "#4285F4" },
-        { value: "100%", label: "respuestas con cita o derivación a ANSES", color: "#34A853" },
-        { value: "0", label: "datos inventados fuera del corpus", color: "#EA4335" },
-      ],
     },
     guild: {
       title: "Guild: Sitio de captación de leads para oficios",
@@ -194,7 +185,6 @@ export const es = {
       status: "En producción",
       statusColor: "#1e7e42",
       stack: "Next.js, Sanity, Tailwind",
-      year: "2026",
       lede: "«Buenas Manos» es un sitio de captación de leads para un gremio de oficios (plomería, carpintería, electricidad y herrería) en Mar del Plata, pensado para SEO local, conversión y contacto de baja fricción.",
       problem:
         "Los oficios dependen del boca a boca y de plataformas que se quedan con el cliente y cobran comisión. El desafío era darle al gremio un canal propio que apareciera en las búsquedas locales y convirtiera visitas en consultas directas, sin intermediarios.",
@@ -208,13 +198,6 @@ export const es = {
       solution:
         "Una landing con secciones por oficio y páginas dedicadas por servicio, cada una optimizada para su búsqueda local («plomero en Mar del Plata», etc.). Los trabajos terminados se cargan desde Sanity y se muestran en una galería paginada. Cada pantalla empuja al contacto directo por WhatsApp con un clic.",
       solutionImage: "home + página de servicio · 16:9",
-      impact:
-        "Le da al gremio un canal propio, indexable y orientado a conversión: transforma búsquedas locales en consultas directas por WhatsApp, sin comisiones ni intermediarios.",
-      metrics: [
-        { value: "4", label: "oficios con página y SEO propios", color: "#4285F4" },
-        { value: "1", label: "clic hasta el contacto por WhatsApp", color: "#EA4335" },
-        { value: "0", label: "comisiones a intermediarios", color: "#34A853" },
-      ],
     },
     portfolio: {
       title: "Portfolio: Clon de Google Search",
@@ -224,12 +207,12 @@ export const es = {
       status: "En producción",
       statusColor: "#1e7e42",
       stack: "Next.js 16, React 19, TS",
-      year: "2026",
       lede: 'El Portfolio de Bruno Simone es un sitio personal construido como una recreación pixel-perfect de Google Search y Wikipedia, cuya metáfora invita al visitante a "buscarlo en Google".',
       problem:
         "Un CV tradicional no diferencia a un desarrollador full-stack de otro. El desafío era demostrar habilidad técnica, atención al detalle y creatividad en el propio medio del producto, no describirlas en una lista de bullets.",
       decisions: [
         'Metáfora "buscame en Google": recrear Search + Wikipedia pixel-perfect en lugar de un layout de portfolio genérico.',
+        "UX intuitiva y familiar: al reutilizar patrones que todo el mundo ya conoce (Google, Wikipedia), un reclutador navega sin fricción y sabe qué esperar en cada paso.",
         "Next.js 16 (App Router) con rutas /, /search y /wiki; estado de búsqueda en la URL.",
         "Bilingüe ES/EN con contexto de i18n: todo el texto es traducible.",
         "Un único componente de tarjeta de resultado reutilizado en las pestañas y en los proyectos.",
@@ -237,13 +220,6 @@ export const es = {
       solution:
         "La navegación reproduce el recorrido real de una búsqueda: Home → resultados con knowledge panel → artículo de Wikipedia. Las pestañas (Perfil / Experiencia / Proyectos / Contacto) organizan el contenido reutilizando un único componente de tarjeta de resultado.",
       solutionImage: "screenshot: flujo home → search → wiki · 16:9",
-      impact:
-        "El formato convierte la revisión de un portfolio en una experiencia memorable y coherente de principio a fin, sin sacrificar accesibilidad ni rendimiento.",
-      metrics: [
-        { value: "3", label: "rutas navegables (home · search · wiki)", color: "#4285F4" },
-        { value: "2", label: "idiomas, 100% del texto traducible", color: "#EA4335" },
-        { value: "0", label: "dependencias pesadas de animación", color: "#34A853" },
-      ],
     },
   },
   wiki: {

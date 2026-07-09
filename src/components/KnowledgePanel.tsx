@@ -60,6 +60,7 @@ export function KnowledgePanel({
               src={photo}
               alt={name}
               fill
+              sizes="(min-width: 1024px) 340px, 100vw"
               className="object-cover object-top"
               priority
             />
@@ -142,7 +143,7 @@ export function KnowledgePanelMobile({
     <div className="border border-surface-border rounded-xl overflow-hidden mb-6 lg:hidden">
       <div className="flex gap-3.5 p-3.5">
         <div className="relative size-[74px] rounded-[10px] overflow-hidden shrink-0">
-          <Image src={photo} alt={name} fill className="object-cover object-top" />
+          <Image src={photo} alt={name} fill sizes="74px" className="object-cover object-top" />
         </div>
         <div className="min-w-0">
           <h2 className="text-xl font-normal text-content-primary leading-tight">

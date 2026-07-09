@@ -60,7 +60,6 @@ export const en = {
     problemTitle: "Problem",
     decisionsTitle: "Design decisions",
     solutionTitle: "Solution",
-    impactTitle: "Impact",
     linkDemo: "Live demo",
     linkRepo: "Code on GitHub",
     notFound: "Case study not found.",
@@ -69,7 +68,6 @@ export const en = {
       stack: "Stack",
       status: "Status",
       role: "Role",
-      year: "Year",
     },
   },
   footer: {
@@ -161,14 +159,14 @@ export const en = {
       logo: "/jubigestor-logo.svg",
       type: "Web app · AI (RAG)",
       role: "Design + Development",
-      status: "In development",
-      statusColor: "#1a73e8",
+      status: "In production",
+      statusColor: "#1e7e42",
       stack: "FastAPI, Gemini, pgvector, Next.js",
-      year: "2026",
       lede: "JubiGestor is a conversational assistant that answers questions about pensions in Argentina in plain language, always citing official ANSES documentation.",
       problem:
-        "Information about pension procedures is scattered across dense, hard-to-parse documents. The challenge was to answer concrete questions in plain language without making things up, a real risk in a sensitive domain like pensions.",
+        "Information about pension procedures is scattered across dense, hard-to-parse documents. The challenge was to answer concrete questions in plain language without making things up, a real risk in a sensitive domain like pensions. On top of that, the target users are older adults (retirees or people about to retire) with low digital literacy and, in many cases, trouble seeing or typing, so good accessibility was a core goal.",
       decisions: [
+        "Accessibility first: voice input (microphone), multiple text sizes to fit each person's needs, high contrast, and a simple, easy-to-understand UX built for older adults with low digital literacy.",
         "RAG architecture: retrieve the relevant chunks from the official corpus before generating, so every answer is grounded in real sources.",
         "Anti-hallucination: if no chunk clears the similarity threshold, the model defers to ANSES instead of inventing.",
         "FastAPI backend with Gemini (generation + embeddings) and PostgreSQL + pgvector for vector search.",
@@ -178,13 +176,6 @@ export const en = {
       solution:
         "The user asks a question; the system embeds the query, finds the nearest chunks in pgvector, and builds the context with its citations. Gemini streams a grounded answer with links to the official documentation. When there isn't enough context, it defers to ANSES rather than risk an incorrect fact.",
       solutionImage: "chat with answer + citations · 16:9",
-      impact:
-        "Turns dense pension documentation into clear, traceable answers: every fact is verifiable at its source, reducing the uncertainty of a pension procedure without sacrificing rigor.",
-      metrics: [
-        { value: "768", label: "embedding dimensions (Gemini, MRL)", color: "#4285F4" },
-        { value: "100%", label: "answers with a citation or deferral to ANSES", color: "#34A853" },
-        { value: "0", label: "facts invented outside the corpus", color: "#EA4335" },
-      ],
     },
     guild: {
       title: "Guild: Lead-generation site for trades",
@@ -194,7 +185,6 @@ export const en = {
       status: "In production",
       statusColor: "#1e7e42",
       stack: "Next.js, Sanity, Tailwind",
-      year: "2026",
       lede: "“Buenas Manos” is a lead-generation site for a trades guild (plumbing, carpentry, electricity, and ironwork) in Mar del Plata, built for local SEO, conversion, and low-friction contact.",
       problem:
         "Trades rely on word of mouth and on platforms that keep the customer and charge a commission. The challenge was to give the guild a channel of its own that shows up in local searches and turns visits into direct inquiries, with no middlemen.",
@@ -208,13 +198,6 @@ export const en = {
       solution:
         "A landing with per-trade sections plus dedicated service pages, each optimized for its local search (“plumber in Mar del Plata”, etc.). Completed works are pulled from Sanity and shown in a paginated gallery. Every screen pushes toward direct WhatsApp contact in one click.",
       solutionImage: "home + service page · 16:9",
-      impact:
-        "Gives the guild a channel of its own, indexable and conversion-oriented: it turns local searches into direct WhatsApp inquiries, with no commissions or middlemen.",
-      metrics: [
-        { value: "4", label: "trades with their own page and SEO", color: "#4285F4" },
-        { value: "1", label: "click to reach WhatsApp contact", color: "#EA4335" },
-        { value: "0", label: "commissions to middlemen", color: "#34A853" },
-      ],
     },
     portfolio: {
       title: "Portfolio: Google Search Clone",
@@ -224,12 +207,12 @@ export const en = {
       status: "In production",
       statusColor: "#1e7e42",
       stack: "Next.js 16, React 19, TS",
-      year: "2026",
       lede: 'Bruno Simone’s Portfolio is a personal site built as a pixel-perfect recreation of Google Search and Wikipedia, whose metaphor invites the visitor to "google him".',
       problem:
         "A traditional resume does not set one full-stack developer apart from another. The challenge was to demonstrate technical skill, attention to detail, and creativity in the product’s own medium, not to describe them in a bullet list.",
       decisions: [
         'The "google me" metaphor: recreate Search + Wikipedia pixel-perfect instead of a generic portfolio layout.',
+        "Intuitive, familiar UX: by reusing patterns everyone already knows (Google, Wikipedia), a recruiter navigates without friction and knows what to expect at every step.",
         "Next.js 16 (App Router) with /, /search and /wiki routes; search state in the URL.",
         "Bilingual ES/EN via i18n context: all copy is translatable.",
         "A single search-result card component reused across the tabs and the projects.",
@@ -237,13 +220,6 @@ export const en = {
       solution:
         "The navigation reproduces a real search journey: Home → results with a knowledge panel → Wikipedia article. The tabs (Overview / Experience / Projects / Contact) organize the content while reusing a single search-result card component.",
       solutionImage: "screenshot: home → search → wiki flow · 16:9",
-      impact:
-        "The format turns reviewing a portfolio into a memorable, coherent experience from start to finish, without sacrificing accessibility or performance.",
-      metrics: [
-        { value: "3", label: "navigable routes (home · search · wiki)", color: "#4285F4" },
-        { value: "2", label: "languages, 100% of copy translatable", color: "#EA4335" },
-        { value: "0", label: "heavy animation dependencies", color: "#34A853" },
-      ],
     },
   },
   wiki: {

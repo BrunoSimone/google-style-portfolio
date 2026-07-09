@@ -78,11 +78,12 @@ function Thumbnail({ project }: { project: Project }) {
 
   if (project.hasImage && project.imageSrc) {
     return (
-      <div className="relative w-full aspect-[16/9] sm:w-[148px] sm:h-[111px] sm:aspect-auto rounded-[10px] overflow-hidden shrink-0">
+      <div className="relative w-full aspect-[16/9] sm:w-[148px] sm:h-[111px] sm:aspect-auto rounded-[10px] overflow-hidden shrink-0 border border-surface-border">
         <Image
           src={project.imageSrc}
           alt={project.title}
           fill
+          sizes="(min-width: 640px) 148px, 100vw"
           className="object-cover"
           loading="lazy"
         />

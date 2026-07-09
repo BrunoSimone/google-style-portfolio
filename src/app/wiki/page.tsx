@@ -85,6 +85,7 @@ function Infobox() {
                 src="/bruno.jpeg"
                 alt={bruno.name}
                 fill
+                sizes="200px"
                 className="object-cover object-top"
               />
             </div>
