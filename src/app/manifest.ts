@@ -2,17 +2,18 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Portfolio de Bruno Simone",
+    name: "Bruno Simone · Video editor",
     short_name: "Bruno Simone",
-    description:
-      "Portfolio profesional de Bruno Simone, Full-Stack Developer.",
+    description: "Video editing for creators.",
     start_url: "/",
     display: "standalone",
-    background_color: "#ffffff",
-    theme_color: "#ffffff",
+    background_color: "#0b0b0c",
+    theme_color: "#0b0b0c",
+    // the B over the site's dither ground, rendered by scripts/brand/render-icons.mjs
     icons: [
-      { src: "/favicon-180.png", sizes: "180x180", type: "image/png" },
-      { src: "/favicon-512.png", sizes: "512x512", type: "image/png" },
+      { src: "/icon2.png", sizes: "192x192", type: "image/png" },
+      { src: "/icon3.png", sizes: "512x512", type: "image/png" },
+      { src: "/apple-icon.png", sizes: "180x180", type: "image/png" },
     ],
   };
 }

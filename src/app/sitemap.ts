@@ -1,20 +1,12 @@
 import type { MetadataRoute } from "next";
+import { webs } from "@/content/work";
 
-const siteUrl = "https://www.brunosimone.dev";
+const SITE = "https://www.brunosimone.dev";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = [
-    { path: "", priority: 1 },
-    { path: "/wiki", priority: 0.9 },
-    { path: "/search", priority: 0.8 },
-    { path: "/case/jubigestor", priority: 0.7 },
-    { path: "/case/canela", priority: 0.7 },
-    { path: "/case/portfolio", priority: 0.7 },
+  return [
+    { url: SITE, changeFrequency: "monthly", priority: 1 },
+    { url: `${SITE}/web`, changeFrequency: "monthly", priority: 0.8 },
+    ...webs.map((w) => ({ url: `${SITE}/web/${w.slug}`, changeFrequency: "monthly" as const, priority: 0.7 })),
   ];
-
-  return routes.map(({ path, priority }) => ({
-    url: `${siteUrl}${path}`,
-    changeFrequency: path === "" ? "monthly" : "yearly",
-    priority,
-  }));
 }

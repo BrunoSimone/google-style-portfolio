@@ -1,157 +1,1509 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+@theme {
+  --color-ink: #0b0b0c;
+  --color-film: #141416;
+  --color-rule: #2a2b2e;
+  --color-bone: #ecebe7;
+  --color-dim: #9a9da3;
+  --color-mid: #8d8f93;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-display);
+  --font-sans: var(--font-mona), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-martian), ui-monospace, monospace;
 
-  --color-google-blue: #4285F4;
-  --color-google-red: #EA4335;
-  --color-google-yellow: #FBBC05;
-  --color-google-green: #34A853;
-
-  --color-link: #1a0dab;
-  --color-link-visited: #681da8;
-  --color-content-primary: #202124;
-  --color-content-secondary: #4d5156;
-  --color-content-tertiary: #70757a;
-  --color-surface: #f8f9fa;
-  --color-surface-border: #dadce0;
-  --color-surface-hover: #f1f3f4;
-
-  --color-wiki-blue: #3366cc;
-  --color-wiki-border: #a2a9b1;
-  --color-wiki-bg: #f8f9fa;
-  --color-wiki-header-border: #a2a9b1;
-
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) + 4px);
+  --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 :root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  color-scheme: dark;
+  --gutter: 16px;
+  --bar-h: 48px;
+  /* film geometry: edge (sprocket margin) width and the gap between frames */
+  --edge: 42px;
+  --frame-gap: 8px;
 }
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
+@media (min-width: 768px) {
+  :root {
+    --gutter: 32px;
+    --bar-h: 56px;
+    --edge: 40px;
   }
 }
 
-/* --- Logo wordmark entrance animation --- */
-@keyframes logoPop {
-  0% {
-    opacity: 0;
-    transform: translateY(0.45em) scale(0.5);
-  }
-  60% {
-    opacity: 1;
-    transform: translateY(-0.04em) scale(1.06);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+html {
+  background: var(--color-ink);
+  color: var(--color-bone);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  scrollbar-color: var(--color-rule) var(--color-ink);
+  scrollbar-width: thin;
 }
 
-.logo-letter {
-  display: inline-block;
-  animation: logoPop 620ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+body {
+  /* transparent so the dust canvas (z-index -1) shows over the ink of html */
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.5;
+  caret-color: var(--color-bone);
 }
 
+::selection {
+  background: var(--color-bone);
+  color: var(--color-ink);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-ink);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-rule);
+  border: 2px solid var(--color-ink);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-mid);
+}
+
+a {
+  color: inherit;
+  text-decoration-color: var(--color-mid);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-bone);
+  outline-offset: 3px;
+}
+
+/* Martian Mono: only for real data (edge numbers, timecodes, frame numbers). */
+.edge-type {
+  font-family: var(--font-mono);
+  font-variation-settings: "wdth" 87;
+  font-size: 10px;
+  line-height: 1;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-variant-numeric: tabular-nums slashed-zero;
+}
+
+.condensed {
+  font-variation-settings: "wdth" 75;
+}
+
+/* sprocket holes: an authored tile repeated down the outer lane of each edge;
+   the inner lane is left clear for the printed edge numbers */
+.perfs,
+.perfs-r {
+  background-repeat: repeat-y;
+  background-position: 0 0;
+  background-size: 100% 24px;
+}
+.perfs {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='24'%3E%3Crect x='5' y='7' width='12' height='9' rx='1.5' fill='%230b0b0c'/%3E%3C/svg%3E");
+}
+.perfs-r {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='24'%3E%3Crect x='25' y='7' width='12' height='9' rx='1.5' fill='%230b0b0c'/%3E%3C/svg%3E");
+}
+
+/* ── Film strip geometry ──────────────────────────────────────────
+   The strip is a size container. --fh (frame height) is whichever
+   runs out first: the height minus a peek of the neighbours, or the
+   width minus both edges, at 9:16. Unregistered custom properties
+   resolve where they are used, so cq units refer to the strip. */
+.film-strip {
+  /* how much of the neighbouring frames shows above and below the gate */
+  --peek: 56px;
+  --fh: min(calc(100cqh - 2 * var(--peek)), calc((100cqw - 2 * var(--edge)) * 16 / 9));
+  --fw: calc(var(--fh) * 9 / 16);
+  --gate-top: calc((100cqh - var(--fh)) / 2);
+}
+.film-col {
+  width: calc(var(--fw) + 2 * var(--edge));
+}
+.film-row {
+  height: calc(var(--fh) + var(--frame-gap));
+  padding-block: calc(var(--frame-gap) / 2);
+}
+.film-track {
+  transform: translate3d(
+    0,
+    calc(var(--gate-top) - var(--frame-gap) / 2 - var(--pos) * (var(--fh) + var(--frame-gap))),
+    0
+  );
+}
+.film-gate {
+  top: var(--gate-top);
+  height: var(--fh);
+  /* rides with its frame while the strip advances (see Reel advanceTo) */
+  transform: translate3d(0, calc(var(--drift, 0) * -1 * (var(--fh) + var(--frame-gap))), 0);
+}
+.film-gate,
+.film-gate-h {
+  z-index: 1;
+}
+
+/* everything outside the centre frame is switched off: darker and drained,
+   so the one lit frame reads as the one that plays and sounds */
+.frame-dim {
+  pointer-events: none;
+  background: rgb(11 11 12 / 0.7);
+}
+.frame-media,
+.film-gate.is-dim video,
+.film-gate-h.is-dim video {
+  filter: saturate(0.25);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* the printed edge run is long (catalog ▸ client ▸ piece ▸ part ▸ format ▸ duration):
+   condensed and tighter so it fits beside one frame; its cell clips it as a last resort */
+.edge-run {
+  font-variation-settings: "wdth" 75;
+  letter-spacing: 0.08em;
+}
+
+/* ── Film strip laid flat (flatbed) ───────────────────────────────
+   Same geometry turned 90°: the band is a size container's full width,
+   the frame height is whatever the height allows (capped so a frame
+   never takes more than --gate-max of the width), the gate sits centred. */
+.film-strip-h {
+  --gate-max: 0.62;
+  --fh: min(calc(100cqh - 2 * var(--edge)), calc(100cqw * var(--gate-max) * 16 / 9));
+  --fw: calc(var(--fh) * 9 / 16);
+  --gate-left: calc((100cqw - var(--fw)) / 2);
+}
+.film-band-h {
+  height: calc(var(--fh) + 2 * var(--edge));
+}
+.film-col-h {
+  width: calc(var(--fw) + var(--frame-gap));
+  padding-inline: calc(var(--frame-gap) / 2);
+}
+.film-track-h {
+  transform: translate3d(
+    calc(var(--gate-left) - var(--frame-gap) / 2 - var(--pos) * (var(--fw) + var(--frame-gap))),
+    0,
+    0
+  );
+}
+.film-gate-h {
+  left: var(--gate-left);
+  width: var(--fw);
+  top: var(--edge);
+  height: var(--fh);
+  /* rides with its frame while the strip advances (see Reel advanceTo) */
+  transform: translate3d(calc(var(--drift, 0) * -1 * (var(--fw) + var(--frame-gap))), 0, 0);
+  will-change: transform;
+}
+.perfs-t,
+.perfs-b {
+  background-repeat: repeat-x;
+  background-position: 0 0;
+  background-size: 24px 100%;
+}
+.perfs-t {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='42'%3E%3Crect x='7' y='5' width='9' height='12' rx='1.5' fill='%230b0b0c'/%3E%3C/svg%3E");
+}
+.perfs-b {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='42'%3E%3Crect x='7' y='25' width='9' height='12' rx='1.5' fill='%230b0b0c'/%3E%3C/svg%3E");
+}
+
+/* a data line jumps in from one band below, overshoots a little and settles */
+.band-in {
+  display: block;
+  animation: band-in 420ms cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+@keyframes band-in {
+  from {
+    transform: translateY(100%);
+  }
+}
 @media (prefers-reduced-motion: reduce) {
-  .logo-letter {
+  .band-in {
     animation: none;
   }
+}
+
+/* ── Hero (24/11) ─────────────────────────────────────────────────
+   Text only, centred on the first screen; the dithered ground keeps its
+   middle clear behind it. No reel: the work starts on scroll. */
+.hero {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 100svh;
+  padding: calc(var(--bar-h) + 32px) var(--gutter) 64px;
+  text-align: center;
+}
+
+/* ── Gallery ──────────────────────────────────────────────────────
+   The delivered work as a contact sheet: one group per client, one strip
+   per series, the parts side by side. Strips are as long as their frames
+   (laid on the sheet, not stretched across it); on phones they scroll. */
+.gal {
+  --gal-fw: 44vw;
+  padding: 96px 0 72px;
+  scroll-margin-top: var(--bar-h);
+}
+.gal-title {
+  max-width: 16ch;
+  padding-inline: var(--gutter);
+  font-size: clamp(34px, 5.2vw, 76px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: var(--color-bone);
+}
+.gal-group {
+  margin-top: 56px;
+}
+.gal-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 20px;
+  padding-inline: var(--gutter);
+}
+.gal-client {
+  font-size: clamp(26px, 3vw, 40px);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-bone);
+}
+.gal-strip {
+  margin-top: 16px;
+  padding-left: var(--gutter);
+}
+.gal-strip + .gal-strip {
+  margin-top: 12px;
+}
+.gal-band {
+  width: fit-content;
+  max-width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: calc(var(--frame-gap) / 2);
+  scrollbar-width: none;
+}
+.gal-band::-webkit-scrollbar {
+  display: none;
+}
+.gal-track {
+  position: relative;
+  display: flex;
+  width: max-content;
+  padding-inline: calc(var(--frame-gap) / 2);
+  background-repeat: repeat-x;
+  background-size: 24px var(--edge);
+  background-position:
+    0 0,
+    0 100%;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='42'%3E%3Crect x='7' y='5' width='9' height='12' rx='1.5' fill='%230b0b0c'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='42'%3E%3Crect x='7' y='25' width='9' height='12' rx='1.5' fill='%230b0b0c'/%3E%3C/svg%3E");
+}
+.gal-col {
+  display: grid;
+  grid-template-rows: var(--edge) auto var(--edge);
+  width: calc(var(--gal-fw) + var(--frame-gap));
+  padding-inline: calc(var(--frame-gap) / 2);
+  scroll-snap-align: start;
+}
+.gal-lane {
+  display: flex;
+  overflow: hidden;
+  color: var(--color-dim);
+}
+.gal-frame {
+  position: relative;
+  display: block;
+  width: var(--gal-fw);
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  background: var(--color-ink);
+  cursor: pointer;
+}
+.gal-frame:focus-visible {
+  outline-offset: -2px;
+}
+.gal-badge {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  padding: 4px 6px;
+  color: var(--color-bone);
+  background: rgb(11 11 12 / 0.7);
+}
+.gal-frame[aria-pressed="false"] .gal-badge {
+  opacity: 0.85;
+}
+.gal-carried {
+  margin-top: 14px;
+  padding-inline: var(--gutter);
+}
+
+/* the grease pencil: one bone line drawn by hand, on the sheet over the frame */
+.grease {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  pointer-events: none;
+}
+.grease path {
+  fill: none;
+  stroke: var(--color-bone);
+  stroke-width: 0.85; /* drawing units: ≈2.4 px on a 250 px frame, ≈1.6 px on a phone */
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 560ms cubic-bezier(0.6, 0, 0.2, 1);
+}
+.grease path.is-drawn {
+  stroke-dashoffset: 0;
+}
+@media (prefers-reduced-motion: reduce) {
+  .grease path {
+    transition: none;
+  }
+}
+@media (min-width: 768px) {
+  .gal {
+    --gal-fw: 220px;
+    padding: 128px 0 96px;
+  }
+  .gal-group {
+    margin-top: 88px;
+  }
+  .gal-strip {
+    margin-top: 22px;
+  }
+}
+@media (min-width: 1200px) {
+  .gal {
+    --gal-fw: 250px;
+  }
+  /* wide screens: the strips on the left, the client and what carries through beside them */
+  .gal-group {
+    display: grid;
+    grid-template-columns: max-content minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
+    grid-template-areas:
+      "strips head"
+      "strips carried"
+      "strips .";
+    column-gap: 40px;
+  }
+  .gal-strips {
+    grid-area: strips;
+  }
+  .gal-head {
+    grid-area: head;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 0 var(--gutter) 0 0;
+    margin-top: calc(var(--edge) + 16px);
+  }
+  .gal-carried {
+    grid-area: carried;
+    margin-top: 20px;
+    padding: 0 var(--gutter) 0 0;
+  }
+  .gal-strips > .gal-strip:first-child {
+    margin-top: 0;
+  }
+}
+
+/* ── Loading screen ───────────────────────────────────────────────
+   Covers the page on every full load (src/components/Loader.tsx); an inline script sets
+   html[data-loaded] once the page has loaded and the entrance has played. If that script
+   never runs, the same lift happens here at 8 s. The ground is drawn on .loader-gl by the same
+   script; the name is drawn in SVG below. */
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding-inline: var(--gutter);
+  background: var(--color-ink);
+  color: var(--color-bone);
+  animation: loader-failsafe 0s linear 8s forwards;
+}
+/* the way out (Bruno, 25/11): the name fades on its own; the ground is the page's own frame, so
+   the screen then simply goes (OUT_MS in Loader.tsx) and the page enters (below) */
+html[data-loaded] .loader {
+  visibility: hidden;
+  pointer-events: none;
+  transition: visibility 0s linear 280ms;
+}
+html[data-loaded] .loader-mark {
+  animation: loader-out 260ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+@keyframes loader-out {
+  to {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html[data-loaded] .loader {
+    opacity: 0;
+    transition:
+      opacity 320ms var(--ease-settle),
+      visibility 0s linear 320ms;
+  }
+  html[data-loaded] .loader-mark {
+    animation: none;
+  }
+}
+
+/* the page's first entrance, right after the loading screen (html[data-entering], set for
+   ENTER_MS by Loader.tsx, never on client navigation): the hero's lines rise from a mask one
+   after another, like the next title card; the bar drops in; the scroll cue comes last */
+.hero-line {
+  display: block;
+  overflow: hidden;
+  /* room for the descenders and the comma inside the mask */
+  padding-block: 0.1em;
+  margin-block: -0.1em;
+}
+.hero-line > * {
+  display: block;
+}
+.hero-sub-line {
+  margin-top: 18px;
+}
+.hero-sub-line .hero-sub {
+  margin-top: 0;
+}
+html[data-entering] .hero-line > * {
+  animation: line-in 720ms cubic-bezier(0.16, 1, 0.3, 1) calc(300ms + var(--i, 0) * 90ms) both;
+}
+@keyframes line-in {
+  from {
+    transform: translateY(110%);
+  }
+}
+html[data-entering] .site-bar {
+  animation: bar-in 640ms cubic-bezier(0.16, 1, 0.3, 1) 520ms both;
+}
+@keyframes bar-in {
+  from {
+    transform: translateY(-100%);
+  }
+}
+html[data-entering] .hero-cue {
+  animation: cue-in 500ms var(--ease-settle) 820ms both;
+  animation-timeline: auto;
+}
+@keyframes cue-in {
+  from {
+    opacity: 0;
+  }
+}
+@keyframes loader-failsafe {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+html:not([data-loaded]) body {
+  overflow: hidden;
+}
+.loader-gl {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+/* the name drawn (src/components/Loader.tsx): every outline traced by a fine bone line, the left
+   ones a touch earlier, then the name fills solid while the line fades. The rest state is the
+   end state, so under reduced motion (no animation) the name simply shows. */
+.loader-mark {
+  position: relative;
+  display: block;
+  width: min(72vw, 560px);
+  height: auto;
+  overflow: visible;
+}
+.loader-line {
+  fill: none;
+  stroke: var(--color-bone);
+  stroke-width: 2.8px; /* half of it shows, outside the name */
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 0;
+  opacity: 0;
+  animation:
+    loader-draw var(--draw) cubic-bezier(0.65, 0, 0.35, 1) var(--d, 0ms) both,
+    loader-line-out var(--fill) cubic-bezier(0.16, 1, 0.3, 1) var(--fill-at) both;
+}
+@keyframes loader-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+}
+/* the line goes as the fill comes, so the settled name has no ring around it */
+@keyframes loader-line-out {
+  from {
+    opacity: 1;
+  }
+}
+.loader-fill {
+  fill: var(--color-bone);
+  animation: loader-fill var(--fill) cubic-bezier(0.16, 1, 0.3, 1) var(--fill-at) both;
+}
+@keyframes loader-fill {
+  from {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .loader-line,
+  .loader-fill {
+    animation: none;
+  }
+}
+
+/* ── Between routes: the new page lands from a little below ── */
+.route-in {
+  animation: route-in 360ms var(--ease-settle) both;
+}
+@keyframes route-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .route-in {
+    animation: none;
+  }
+}
+
+/* ── Inner pages ──────────────────────────────────────────────── */
+.page-head {
+  padding: calc(var(--bar-h) + 48px) var(--gutter) 0;
+}
+.page-title {
+  max-width: 14ch;
+  font-size: clamp(44px, 8vw, 96px);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: var(--color-bone);
+}
+.page-lede {
+  max-width: 46ch;
+  margin-top: 20px;
+  font-size: clamp(17px, 1.5vw, 20px);
+  line-height: 1.45;
+  color: var(--color-dim);
+  text-wrap: pretty;
+}
+.page-edge {
+  margin-top: 18px;
+  color: var(--color-dim);
+}
+.sec-title {
+  max-width: 18ch;
+  font-size: clamp(34px, 5.2vw, 76px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: var(--color-bone);
+}
+.more-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-bone);
+  text-decoration: underline;
+  text-decoration-color: var(--color-mid);
+  transition: text-decoration-color 150ms var(--ease-settle);
+}
+.more-link:hover {
+  text-decoration-color: var(--color-bone);
+}
+.more-link svg {
+  transition: transform 200ms var(--ease-settle);
+}
+.more-link:hover svg {
+  transform: translateX(3px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .more-link svg {
+    transition: none;
+  }
+}
+.draft-flag {
+  display: inline-block;
+  margin-top: 14px;
+  padding: 6px 8px;
+  border: 1px dashed rgb(141 143 147 / 0.6);
+  color: var(--color-dim);
+}
+
+/* context and decisions: the reasoning behind a piece, set like an edit's notes */
+.notes {
+  padding: 96px var(--gutter) 0;
+}
+.notes-block + .notes-block {
+  margin-top: 72px;
+}
+.notes-h {
+  font-size: clamp(26px, 3vw, 40px);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-bone);
+}
+.notes-body {
+  margin-top: 20px;
+}
+.notes-body p {
+  max-width: 62ch;
+  font-size: clamp(17px, 1.4vw, 19px);
+  line-height: 1.55;
+  color: var(--color-bone);
+  text-wrap: pretty;
+}
+.notes-body p + p {
+  margin-top: 1em;
+}
+.decisions {
+  border-top: 1px solid var(--color-rule);
+}
+.decision {
+  padding: 20px 0 22px;
+  border-bottom: 1px solid var(--color-rule);
+}
+.decision-t {
+  font-size: 18px;
+  font-weight: 650;
+  line-height: 1.3;
+  color: var(--color-bone);
+}
+.decision-b {
+  max-width: 62ch;
+  margin-top: 6px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--color-dim);
+}
+@media (min-width: 900px) {
+  .notes {
+    padding-top: 128px;
+  }
+  .notes-block {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    column-gap: 40px;
+  }
+  .notes-body {
+    margin-top: 0;
+  }
+  .decisions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 40px;
+    border-top: 0;
+  }
+  .decision {
+    border-top: 1px solid var(--color-rule);
+    border-bottom: 0;
+  }
+}
+
+/* the before/after inside a piece's page: no full screen of its own */
+.ba[data-compact] {
+  min-height: 0;
+  padding-top: 128px;
+}
+
+/* the next piece */
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin: 96px var(--gutter) 0;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-rule);
+}
+.pager a {
+  font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 800;
+  line-height: 1.1;
+  text-decoration: none;
+}
+.pager a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+
+/* ── Webs: screenshots laid on the same perforated band ─────────── */
+.web-band {
+  width: fit-content;
+  max-width: calc(100% - var(--gutter));
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  margin-left: var(--gutter);
+}
+.web-band::-webkit-scrollbar {
+  display: none;
+}
+.web-track {
+  --web-h: 300px;
+  display: flex;
+  align-items: stretch;
+  width: max-content;
+  padding-inline: calc(var(--frame-gap) / 2);
+  background-repeat: repeat-x;
+  background-size: 24px var(--edge);
+  background-position:
+    0 0,
+    0 100%;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='42'%3E%3Crect x='7' y='5' width='9' height='12' rx='1.5' fill='%230b0b0c'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='42'%3E%3Crect x='7' y='25' width='9' height='12' rx='1.5' fill='%230b0b0c'/%3E%3C/svg%3E");
+}
+.web-col {
+  display: grid;
+  grid-template-rows: var(--edge) var(--web-h) var(--edge);
+  padding-inline: calc(var(--frame-gap) / 2);
+}
+.web-shot {
+  position: relative;
+  height: var(--web-h);
+  overflow: hidden;
+  background: var(--color-ink);
+}
+.web-shot img {
+  display: block;
+  height: 100%;
+  width: auto;
+}
+.web-shot[data-kind="desktop"] {
+  aspect-ratio: 1440 / 900;
+}
+.web-shot[data-kind="phone"] {
+  aspect-ratio: 390 / 844;
+}
+.web-shot img {
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+@media (min-width: 768px) {
+  .web-track {
+    --web-h: 360px;
+  }
+}
+@media (min-width: 1200px) {
+  .web-track {
+    --web-h: 420px;
+  }
+}
+.web-item {
+  padding-top: 72px;
+}
+.web-item + .web-item {
+  padding-top: 96px;
+}
+.web-item .work-head {
+  margin-top: 22px;
+}
+.web-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 28px;
+  margin-top: 10px;
+}
+.xp {
+  padding: 128px var(--gutter) 0;
+}
+.xp-list {
+  margin-top: 24px;
+  border-top: 1px solid var(--color-rule);
+}
+.xp-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 4px 24px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--color-rule);
+}
+.xp-co {
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--color-bone);
+}
+.xp-role {
+  font-size: 16px;
+  color: var(--color-dim);
+}
+
+/* ── Home: what else is on the site ───────────────────────────── */
+.preview {
+  padding: 128px 0 0;
+}
+.preview-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px 32px;
+  padding-inline: var(--gutter);
+}
+.preview-side {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 28px;
+}
+/* the reel (24/11): the old hero's flatbed, a few seconds of every piece running by itself */
+.reel-band {
+  height: clamp(420px, 62svh, 620px);
+  margin-top: 32px;
+}
+.reel-band .film-strip-h {
+  --gate-max: 0.8;
+}
+@media (min-width: 768px) {
+  .reel-band .film-strip-h {
+    --gate-max: 0.62;
+  }
+}
+/* ── The work (24/11) ─────────────────────────────────────────────
+   The three projects on the home, each a head over a band of perforated film:
+   the playable cut(s), and beside them a contact sheet of the piece. */
+.work {
+  padding-top: 72px;
+  scroll-margin-top: var(--bar-h);
+}
+.project {
+  padding: 72px var(--gutter) 0;
+}
+.project-head {
+  display: grid;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.project-edge {
+  margin-bottom: 12px;
+}
+.project-title {
+  font-size: clamp(44px, 7vw, 104px);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  color: var(--color-bone);
+}
+.project-line {
+  max-width: 42ch;
+  font-size: 17px;
+  line-height: 1.45;
+  color: var(--color-dim);
+  text-wrap: pretty;
+}
+.project-credit {
+  max-width: 96ch;
+  margin-top: 18px;
+  font-size: 12px;
+  line-height: 1.55;
+  color: var(--color-mid);
+}
+
+/* a stretch of film: frames side by side between two perforated lanes */
+.band {
+  display: flex;
+  width: max-content;
+  max-width: 100%;
+  padding-inline: calc(var(--frame-gap) / 2);
+  background-color: var(--color-film);
+  background-repeat: repeat-x;
+  background-size: 24px var(--edge);
+  background-position:
+    0 0,
+    0 100%;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='42'%3E%3Crect x='7' y='5' width='9' height='12' rx='1.5' fill='%230b0b0c'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='42'%3E%3Crect x='7' y='25' width='9' height='12' rx='1.5' fill='%230b0b0c'/%3E%3C/svg%3E");
+}
+.band-col {
+  display: grid;
+  grid-template-rows: var(--edge) auto var(--edge);
+  flex: 1 1 0;
+  min-width: 0;
+  padding-inline: calc(var(--frame-gap) / 2);
+}
+.band-frame,
+.band-still {
+  position: relative;
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+  background: var(--color-ink);
+}
+.band-frame[data-wide] {
+  aspect-ratio: 16 / 9;
+}
+.band-frame video,
+.band-still img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.band-frame video:focus-visible {
+  outline: 2px solid var(--color-bone);
+  outline-offset: -2px;
+}
+.band-hit {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  padding: 10px;
+  cursor: pointer;
+}
+.band-hit:focus-visible,
+.band-still:focus-visible {
+  outline: 2px solid var(--color-bone);
+  outline-offset: -4px;
+}
+/* Pick a pile: the part in the player stands out, the others step back until hovered */
+.band-still[aria-pressed] img {
+  transition: opacity 180ms var(--ease-settle);
+}
+.band-still[aria-pressed="false"] img {
+  opacity: 0.5;
+}
+.band-still[aria-pressed="false"]:hover img {
+  opacity: 0.85;
+}
+.band-still[aria-pressed="true"]::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 0 2px var(--color-bone);
+  pointer-events: none;
+}
+.band-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 28px;
+  padding: 0 9px;
+  background: rgb(11 11 12 / 0.78);
+  color: var(--color-bone);
+  transition: background-color 150ms var(--ease-settle);
+}
+.band-hit:hover .band-badge {
+  background: var(--color-ink);
+}
+button.band-still {
+  cursor: pointer;
+}
+button.band-still img {
+  transition: opacity 150ms var(--ease-settle);
+}
+button.band-still:hover img {
+  opacity: 0.8;
+}
+
+/* Roller Pro: the short beside the long at one height (columns in the ratio of their widths),
+   the before/after under the long with its note beside it */
+.roller-cuts {
+  display: grid;
+  gap: 12px;
+}
+.roller-cuts .band {
+  width: 100%;
+}
+.roller-cuts .band:first-child {
+  width: min(72%, 300px);
+}
+.roller-ba {
+  display: grid;
+  gap: 16px;
+  margin-top: 28px;
+}
+.roller-ba .band {
+  width: 100%;
+}
+.ba-title {
+  font-size: 24px;
+  font-weight: 800;
+  line-height: 1.05;
+  color: var(--color-bone);
+}
+.ba-text {
+  max-width: 30ch;
+  margin-top: 6px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--color-dim);
+}
+.ba-switch {
+  display: inline-flex;
+  margin-top: 14px;
+  border: 1px solid var(--color-rule);
+}
+.ba-switch button {
+  min-width: 72px;
+  min-height: 44px;
+  padding: 0 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-dim);
+  cursor: pointer;
+  transition:
+    color 150ms var(--ease-settle),
+    background-color 150ms var(--ease-settle);
+}
+.ba-switch button:hover {
+  color: var(--color-bone);
+}
+.ba-switch button[aria-pressed="true"] {
+  background: var(--color-bone);
+  color: var(--color-ink);
+}
+
+/* Félicette and Pick a pile: the piece, then a contact sheet of it (scrolls sideways on phones) */
+.project-media {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+}
+.band-lead {
+  width: min(78%, 320px);
+}
+.band-sheet-wrap {
+  min-width: 0;
+}
+.band-sheet {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+}
+.band-sheet::-webkit-scrollbar {
+  display: none;
+}
+.band-sheet .band-col {
+  flex: 0 0 108px;
+}
+.carried {
+  margin-top: 12px;
+}
+
+@media (min-width: 900px) {
+  .work {
+    padding-top: 96px;
+  }
+  .project {
+    padding-top: 128px;
+  }
+  .project-head {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: end;
+    gap: 32px;
+    margin-bottom: 32px;
+  }
+  .project-line {
+    font-size: 18px;
+  }
+  /* 9:16 and 16:9 at one height --h: each band adds 16 px of film around its frame and the
+     columns are 12 px apart, so W = 44 + h × (0.5625 + 1.7778). Félicette and Pick a pile use
+     the same left column, so every lead piece lines up down the page. */
+  .project {
+    container-type: inline-size;
+  }
+  .roller-cuts,
+  .roller-ba,
+  .project-media {
+    --h: calc((100cqw - 44px) / 2.3403);
+    grid-template-columns: calc(var(--h) * 0.5625 + 16px) minmax(0, 1fr);
+    align-items: end;
+  }
+  .roller-cuts .band:first-child {
+    width: 100%;
+  }
+  .roller-ba {
+    align-items: start;
+    margin-top: 12px;
+  }
+  .roller-ba-side {
+    padding-top: calc(var(--edge) + 2px);
+  }
+  .band-lead {
+    width: 100%;
+  }
+  .band-sheet {
+    width: 100%;
+    overflow: visible;
+  }
+  .band-sheet .band-col {
+    flex: 1 1 0;
+  }
+}
+
+/* the web work in passing (Bruno, 24/11): one quiet line under the close, home only, the whole strip a link */
+.also-web {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px 24px;
+  margin: 0 var(--gutter) max(32px, env(safe-area-inset-bottom));
+  padding: 14px 0;
+  border-block: 1px solid var(--color-rule);
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--color-dim);
+  text-decoration: none;
+  transition: border-color 150ms var(--ease-settle);
+}
+.also-web-more {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  font-weight: 600;
+  color: var(--color-bone);
+  text-decoration: underline;
+  text-decoration-color: var(--color-mid);
+  transition: text-decoration-color 150ms var(--ease-settle);
+}
+.also-web-more svg {
+  transition: transform 200ms var(--ease-settle);
+}
+.also-web:hover {
+  border-color: var(--color-mid);
+}
+.also-web:hover .also-web-more {
+  text-decoration-color: var(--color-bone);
+}
+.also-web:hover .also-web-more svg {
+  transform: translateX(3px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .also-web,
+  .also-web-more,
+  .also-web-more svg {
+    transition: none;
+  }
+}
+
+/* ── Close ────────────────────────────────────────────────────── */
+.close {
+  padding: 160px var(--gutter) max(48px, env(safe-area-inset-bottom));
+  scroll-margin-top: var(--bar-h);
+}
+.close-inner {
+  display: grid;
+  gap: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--color-rule);
+}
+.close-title {
+  max-width: 11ch;
+  font-size: clamp(44px, 8vw, 96px);
+  font-weight: 800;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: var(--color-bone);
+}
+.close-alt {
+  margin-top: 20px;
+  font-size: 16px;
+}
+.close-form {
+  display: grid;
+  gap: 22px;
+  max-width: 640px;
+}
+.close-row {
+  display: grid;
+  gap: 22px;
+}
+.close-field label {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-bone);
+}
+.close-field input,
+.close-field textarea {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px 0 10px;
+  font: inherit;
+  font-size: 17px;
+  color: var(--color-bone);
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid var(--color-mid);
+  border-radius: 0;
+  outline: none;
+  transition: border-color 150ms var(--ease-settle);
+}
+.close-field textarea {
+  resize: vertical;
+  min-height: 132px;
+  line-height: 1.5;
+}
+.close-field input::placeholder,
+.close-field textarea::placeholder {
+  color: var(--color-dim);
+}
+.close-field input:hover,
+.close-field textarea:hover {
+  border-bottom-color: var(--color-dim);
+}
+/* the field you are in: its line turns bone and thickens (any focus, mouse included) */
+.close-field input:focus,
+.close-field textarea:focus {
+  border-bottom-color: var(--color-bone);
+  box-shadow: 0 1px 0 0 var(--color-bone);
+}
+/* a field to fix: the line itself says so, dashed and thick, with the reason under it */
+.close-field [aria-invalid="true"] {
+  border-bottom: 2px dashed var(--color-bone);
+  padding-bottom: 9px;
+}
+.close-field [aria-invalid="true"]:focus {
+  box-shadow: none;
+}
+.close-field input:disabled,
+.close-field textarea:disabled {
+  opacity: 0.6;
+}
+.close-err {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--color-bone);
+}
+.close-err::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 6px;
+  margin-right: 8px;
+  background: currentColor;
+  clip-path: polygon(0 0, 100% 50%, 0 100%);
+  vertical-align: 1px;
+}
+.close-send {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px 20px;
+  margin-top: 6px;
+}
+.close-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 52px;
+  padding: 0 28px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-ink);
+  background: var(--color-bone);
+  border: 1px solid var(--color-bone);
+  transition:
+    background-color 150ms var(--ease-settle),
+    color 150ms var(--ease-settle),
+    transform 120ms var(--ease-settle);
+}
+.close-btn:hover:not(:disabled) {
+  color: var(--color-bone);
+  background: transparent;
+}
+.close-btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+.close-btn:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+.close-btn svg {
+  transition: translate 150ms var(--ease-settle);
+}
+.close-btn:hover:not(:disabled) svg {
+  translate: 3px 0;
+}
+.close-status {
+  font-size: 15px;
+  color: var(--color-bone);
+}
+.close-status:empty {
+  display: none;
+}
+/* sent: the form gives way to the confirmation */
+.close-done {
+  display: grid;
+  align-content: start;
+  justify-items: start;
+  gap: 14px;
+  max-width: 640px;
+}
+.close-done-title {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-bone);
+}
+.close-done-title:focus {
+  outline: none;
+}
+.close-done-text {
+  font-size: 17px;
+  line-height: 1.5;
+  color: var(--color-dim);
+  overflow-wrap: anywhere;
+}
+.close-again {
+  min-height: 44px;
+  margin-top: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-bone);
+  text-decoration: underline;
+  text-decoration-color: var(--color-mid);
+  text-underline-offset: 4px;
+  transition: text-decoration-color 150ms var(--ease-settle);
+}
+.close-again:hover {
+  text-decoration-color: var(--color-bone);
+}
+.close-again:focus-visible {
+  outline: 2px solid var(--color-bone);
+  outline-offset: 4px;
+}
+@media (min-width: 768px) {
+  .close-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .close-btn {
+    width: auto;
+  }
+}
+@media (min-width: 1024px) {
+  .close {
+    padding-top: 200px;
+    padding-bottom: 64px;
+  }
+  .close-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 640px);
+    column-gap: 64px;
+    padding-top: 40px;
+  }
+}
+
+.hero-cue {
+  position: absolute;
+  bottom: max(24px, env(safe-area-inset-bottom));
+  left: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  translate: -50% 0;
+  color: var(--color-dim);
+}
+@supports (animation-timeline: scroll()) {
+  .hero-cue {
+    animation: cue-out linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 160px;
+  }
+}
+@keyframes cue-out {
+  to {
+    opacity: 0;
+  }
+}
+
+/* ── Hero intro: who this is, video first, then the two ways on ── */
+.hero-intro {
+  display: grid;
+  justify-items: center;
+  min-width: 0;
+}
+.hero-title {
+  max-width: 17ch;
+  font-size: clamp(34px, 5vw, 72px);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+  color: var(--color-bone);
+}
+.hero-sub {
+  max-width: 44ch;
+  margin-top: 18px;
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.45;
+  text-wrap: balance;
+  color: var(--color-dim);
+}
+.hero-sub a {
+  color: var(--color-bone);
+  text-decoration-color: var(--color-mid);
+  transition: text-decoration-color 150ms var(--ease-settle);
+}
+.hero-sub a:hover {
+  text-decoration-color: var(--color-bone);
+}
+
+/* ── Film dust behind everything (src/components/Dust.tsx) ── */
+.ground {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
 }

@@ -1,156 +1,83 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, Poppins } from "next/font/google";
-import { LanguageProvider } from "@/i18n/context";
+import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
+import { Close } from "@/components/Close";
+import { Backdrop } from "@/components/bg/Backdrop";
+import { Loader } from "@/components/Loader";
+import { SiteBar } from "@/components/SiteBar";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const mona = localFont({
+  src: "../fonts/MonaSans-var.woff2",
+  variable: "--font-mona",
+  weight: "400 800",
+  display: "swap",
+  preload: true,
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
-const poppins = Poppins({
-  variable: "--font-display",
-  subsets: ["latin"],
-  weight: ["600", "700"],
+const martian = localFont({
+  src: "../fonts/MartianMono-var.woff2",
+  variable: "--font-martian",
+  weight: "400 600",
+  display: "swap",
+  preload: true,
 });
 
 const siteUrl = "https://www.brunosimone.dev";
-const title = "Bruno Simone | Full-Stack Developer";
+const title = "Bruno Simone · Video editor";
 const description =
-  "Portfolio de Bruno Simone, Full-Stack Developer en Mar del Plata. Experiencia en React, TypeScript, Next.js, Node.js, NestJS, SaaS e inteligencia artificial.";
+  "Video editor. Every project gets a style of its own (grade, type, subtitles, sound), held in every piece, with the decisions behind it explained.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: {
-    default: title,
-    template: "%s | Bruno Simone",
-  },
+  title: { default: title, template: "%s · Bruno Simone" },
   description,
-  alternates: {
-    canonical: "/",
-  },
-  applicationName: "Portfolio de Bruno Simone",
+  alternates: { canonical: "/" },
+  applicationName: "Bruno Simone",
   authors: [{ name: "Bruno Simone", url: siteUrl }],
   creator: "Bruno Simone",
-  publisher: "Bruno Simone",
-  category: "technology",
-  keywords: [
-    "Bruno Simone",
-    "Full-Stack Developer",
-    "Software Developer",
-    "React",
-    "TypeScript",
-    "Next.js",
-    "Node.js",
-    "NestJS",
-    "Mar del Plata",
-    "Argentina",
-  ],
-  icons: {
-    icon: [
-      { url: "/favicon-32.png", type: "image/png", sizes: "32x32" },
-      { url: "/favicon-512.png", type: "image/png", sizes: "512x512" },
-    ],
-    apple: [{ url: "/favicon-180.png", sizes: "180x180" }],
-  },
   openGraph: {
     type: "website",
     url: siteUrl,
-    siteName: "Portfolio de Bruno Simone",
+    siteName: "Bruno Simone",
     title,
     description,
-    locale: "es_AR",
-    images: [
-      {
-        url: "/portfolio-image.png",
-        width: 2190,
-        height: 1180,
-        alt: "Portfolio de Bruno Simone, Full-Stack Developer",
-      },
-    ],
+    locale: "en_US",
   },
-  twitter: {
-    card: "summary_large_image",
-    title,
-    description,
-    images: ["/portfolio-image.png"],
-  },
+  twitter: { card: "summary_large_image", title, description },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export const viewport: Viewport = {
+  themeColor: "#0b0b0c",
+  colorScheme: "dark",
+  width: "device-width",
+  initialScale: 1,
+};
+
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es-AR">
+    <html lang="en" className={`${mona.variable} ${martian.variable}`} suppressHydrationWarning>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@graph": [
-                {
-                  "@type": "WebSite",
-                  "@id": `${siteUrl}/#website`,
-                  url: siteUrl,
-                  name: "Portfolio de Bruno Simone",
-                  alternateName: "Bruno Simone",
-                  description,
-                  inLanguage: ["es-AR", "en"],
-                  author: { "@id": `${siteUrl}/#person` },
-                },
-                {
-                  "@type": "Person",
-                  "@id": `${siteUrl}/#person`,
-                  name: "Bruno Daniel Simone",
-                  alternateName: "Bruno Simone",
-                  url: siteUrl,
-                  image: `${siteUrl}/bruno.jpeg`,
-                  jobTitle: "Full-Stack Developer",
-                  worksFor: {
-                    "@type": "Organization",
-                    name: "WeCheck AI",
-                    url: "https://wecheck.ai/",
-                  },
-                  homeLocation: {
-                    "@type": "Place",
-                    name: "Mar del Plata, Buenos Aires, Argentina",
-                  },
-                  alumniOf: {
-                    "@type": "CollegeOrUniversity",
-                    name: "Universidad Tecnológica Nacional",
-                    alternateName: "UTN",
-                  },
-                  knowsAbout: [
-                    "React",
-                    "TypeScript",
-                    "Next.js",
-                    "Node.js",
-                    "NestJS",
-                    "Software as a Service",
-                    "Artificial Intelligence",
-                  ],
-                  sameAs: [
-                    "https://www.linkedin.com/in/bruno-daniel-simone/",
-                    "https://github.com/BrunoSimone",
-                  ],
-                },
-              ],
+              "@type": "Person",
+              name: "Bruno Simone",
+              url: siteUrl,
+              jobTitle: "Video editor",
+              homeLocation: { "@type": "Place", name: "Mar del Plata, Argentina" },
             }).replace(/</g, "\\u003c"),
           }}
         />
       </head>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased`}
-      >
-        <LanguageProvider>{children}</LanguageProvider>
+      <body>
+        <Loader />
+        <Backdrop />
+        <SiteBar />
+        <main id="main">{children}</main>
+        <Close />
+        {/* the line to /web (AlsoWeb) is hidden until /web is reworked (Bruno, 25/11) */}
       </body>
     </html>
   );
