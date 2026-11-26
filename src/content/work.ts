@@ -72,7 +72,7 @@ export const hookVideo = {
 /* ───────────────────────────── the projects ─────────────────────────────
  * The home is the video landing (Bruno, 24/11): three projects, everything on the page, no
  * per-piece routes. Work is shown abstracted from who it was for: no client names, handles or
- * logos. Full pieces play with sound on request only; built by scripts/media/encode-work.sh.
+ * logos, except Aeon Arcana on Pick a pile, named with their OK (Bruno, 26/11). Full pieces play with sound on request only; built by scripts/media/encode-work.sh.
  *
  * Copy marked `draft` was written by Claude from the project files (delivery notes, credits)
  * and waits for Bruno's corrections; nothing in it goes beyond those files.
@@ -95,6 +95,8 @@ export type Project = {
   line: string;
   /** required credits and licences, in small print under the project */
   credit?: string;
+  /** where the client published it, in the same small print (opens in a new tab) */
+  published?: { label: string; href: string };
   draft: boolean;
 };
 
@@ -142,8 +144,10 @@ export const felicette: Project & { cut: Cut; stills: Still[] } = {
 export const pickAPile: Project & { parts: Cut[]; carried: string[] } = {
   slug: "pick-a-pile",
   title: "Pick a pile",
-  edge: ["BS 0001–0007", "Series", "7 parts", "9:16"],
-  line: "A recorded tarot reading cut into seven vertical parts, one card each, under one look.",
+  // client work, named with Aeon Arcana's OK (Bruno, 26/11)
+  edge: ["BS 0001–0007", "Client work", "Series", "7 parts", "9:16"],
+  line: "A recorded tarot reading cut into seven vertical parts for Aeon Arcana, one card each, under one look. Published on their channels.",
+  published: { label: "Aeon Arcana on TikTok", href: "https://www.tiktok.com/@aeon_arcana" },
   carried: ["One title card", "One grade", "One subtitle style"],
   /** all seven play (Bruno, 25/11); each part's cover is its poster */
   parts: [...pilePart1, ...pilePart2].map((piece, i) => ({
@@ -244,21 +248,22 @@ export const experience = [
   { company: "Gol Ball", role: "Frontend developer", when: "Jan 2023 – Sep 2023" },
 ];
 
-/* ───── parked: /about was removed (Bruno, 26/11); kept here in case they come back ───── */
+/* ───── how I work (the statement stays parked since /about was removed, 26/11) ───── */
 
 /** approved by Bruno (signature) */
 export const statement =
   "I set your style once: grade, type, subtitles, sound. Every video after that comes back faster, and looks like you.";
 
 /**
- * The process as sealed stages (approved order, no turnaround numbers). The one-line
- * descriptions come from PRODUCT.md (brief form first, two rounds, all asynchronous); approved
- * by Bruno, 25/11.
+ * How I work (Bruno, 26/11): four steps on the home, between the work and the close. No prices,
+ * no turnaround numbers (step 02 stays numberless, Bruno 26/11), never the word «asynchronous».
  */
-export const stages: Note[] = [
-  { title: "Brief", body: "A short form before I start: what it's for, where it goes, how it should feel." },
-  { title: "First cut", body: "The whole piece, cut, graded and subtitled in your style." },
-  { title: "Round 1", body: "Your notes on a review link. I apply them and send it back." },
-  { title: "Round 2", body: "One more pass for whatever is left." },
-  { title: "Delivery", body: "Final files, ready to publish. Your style stays saved for the next one." },
+export const steps: Note[] = [
+  { title: "Brief", body: "You send the footage and a few references, or just tell me what it's for." },
+  { title: "First cut", body: "The whole piece, cut, graded and captioned in your style." },
+  { title: "Two rounds of changes", body: "Included in every piece." },
+  { title: "Delivery", body: "Ready-to-post MP4 for each platform, with a captions file (SRT) if you need one." },
 ];
+
+/** the small line under the steps */
+export const stepsFacts = ["English and Spanish", "Licensed music and sound effects (Epidemic Sound)"];

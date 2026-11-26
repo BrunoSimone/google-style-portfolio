@@ -50,7 +50,20 @@ function Shell({ project, children }: { project: Project; children: ReactNode })
     <article className="project" aria-labelledby={`${project.slug}-title`}>
       <ProjectHead project={project} />
       {children}
-      {project.credit && <p className="project-credit">{project.credit}</p>}
+      {(project.credit || project.published) && (
+        <p className="project-credit">
+          {project.credit}
+          {project.published && (
+            <a href={project.published.href} target="_blank" rel="noopener" className="project-out">
+              {project.published.label}
+              <svg width="9" height="9" viewBox="0 0 9 9" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden="true">
+                <path d="M2 7L7.5 1.5M3 1.5h4.5V6" strokeLinecap="square" />
+              </svg>
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+          )}
+        </p>
+      )}
     </article>
   );
 }

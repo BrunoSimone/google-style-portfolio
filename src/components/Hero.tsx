@@ -1,9 +1,9 @@
 import type { CSSProperties } from "react";
 
 /**
- * Hero (Bruno, 23–24/11): who this is and nothing else. The name, the trade (the home is the video
- * landing; the web work sits behind a quiet line under the close) and the way on (down to the
- * work; /about was removed, Bruno, 26/11), centred on the first screen over the dithered ground; no project here,
+ * Hero (Bruno, 23–24/11): who this is and what he offers. The name, the trade (the home is the video
+ * landing; the web work sits behind a quiet line under the close) and, since 26/11, what he edits
+ * and for whom (someone arriving from a job post has to see the service), centred on the first screen over the dithered ground; no project here,
  * the work starts on scroll, and a quiet cue at the foot says so (it fades once you scroll).
  * The small mark stays in the bar. On a full load, once the logo has gone, its lines rise into
  * place from a mask, one after another (.hero-line, html[data-entering]; Bruno, 25/11).
@@ -22,7 +22,7 @@ export function Hero() {
         </h1>
         <div className="hero-line hero-sub-line" style={{ "--i": 2 } as CSSProperties}>
           <p className="hero-sub">
-            Thanks for stopping by. Here&apos;s more <a href="#work">about my work</a>.
+            Short-form and YouTube edits for brands and creators: captions, motion graphics, color and sound.
           </p>
         </div>
       </div>

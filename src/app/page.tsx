@@ -1,12 +1,14 @@
 import { Hero } from "@/components/Hero";
 import { MoreLink } from "@/components/Pieces";
 import { Reel, ReelStrip, SoundButton } from "@/components/reel/Reel";
+import { Steps } from "@/components/Steps";
 import { Work } from "@/components/Work";
 
 /**
  * Home: the video landing (Bruno, 24/11; /web is the other landing, no /video). Who this is first
  * (text only); then the reel (a few seconds of every piece, running by itself); then the three
- * projects in full: Roller Pro (short, long, before/after), Félicette, Pick a pile. The close and,
+ * projects in full: Roller Pro (short, long, before/after), Félicette, Pick a pile; then how I work
+ * (four steps, 26/11). The close and,
  * under it, one quiet line to the web work come from the layout.
  */
 export default function Home() {
@@ -34,6 +36,8 @@ export default function Home() {
       </section>
 
       <Work />
+
+      <Steps />
     </>
   );
 }

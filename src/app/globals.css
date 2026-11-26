@@ -946,6 +946,31 @@ html:not([data-loaded]) body {
   line-height: 1.55;
   color: var(--color-mid);
 }
+/* where a client published the piece: quiet, in the credit's small print */
+.project-out {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  /* 44 px to tap, without moving the line */
+  padding-block: 13px;
+  margin-block: -13px;
+  color: var(--color-dim);
+  text-decoration: underline;
+  text-decoration-color: var(--color-rule);
+  transition:
+    color 150ms var(--ease-settle),
+    text-decoration-color 150ms var(--ease-settle);
+}
+.project-out:hover {
+  color: var(--color-bone);
+  text-decoration-color: var(--color-mid);
+}
+.project-out svg {
+  transition: translate 150ms var(--ease-settle);
+}
+.project-out:hover svg {
+  translate: 1px -1px;
+}
 
 /* a stretch of film: frames side by side between two perforated lanes */
 .band {
@@ -1228,6 +1253,97 @@ button.band-still:hover img {
   .also-web-more,
   .also-web-more svg {
     transition: none;
+  }
+}
+
+/* ── How I work (26/11) ───────────────────────────────────────────
+   Four steps on one stretch of film, numbered on the frame like the catalog
+   codes. Phones: the strip stands up (perforations either side, one column);
+   from 768 px it lies across (perforations above and below). */
+.steps {
+  padding: 128px var(--gutter) 0;
+  scroll-margin-top: var(--bar-h);
+}
+.steps-band {
+  display: grid;
+  max-width: 1280px;
+  margin-top: 32px;
+  padding: calc(var(--frame-gap) / 2) var(--edge);
+  background-color: var(--color-film);
+  background-repeat: repeat-y;
+  background-size: var(--edge) 24px;
+  background-position:
+    0 0,
+    100% 0;
+  background-image:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='24'%3E%3Crect x='5' y='7' width='12' height='9' rx='1.5' fill='%230b0b0c'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='24'%3E%3Crect x='25' y='7' width='12' height='9' rx='1.5' fill='%230b0b0c'/%3E%3C/svg%3E");
+}
+.step {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-content: start;
+  column-gap: 12px;
+  margin-block: calc(var(--frame-gap) / 2);
+  padding: 14px 14px 16px;
+  background: var(--color-ink);
+}
+/* phones: the number sits beside the step's name, so each frame is two lines shorter */
+.step-n {
+  align-self: center;
+  color: var(--color-dim);
+}
+.step-t {
+  font-size: clamp(22px, 2.4vw, 32px);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--color-bone);
+  text-wrap: balance;
+}
+.step-b {
+  grid-column: 2;
+  max-width: 40ch;
+  margin-top: 6px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--color-dim);
+  text-wrap: pretty;
+}
+.steps-facts {
+  margin-top: 16px;
+}
+@media (min-width: 768px) {
+  .steps-band {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    padding: var(--edge) calc(var(--frame-gap) / 2);
+    background-repeat: repeat-x;
+    background-size: 24px var(--edge);
+    background-position:
+      0 0,
+      0 100%;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='42'%3E%3Crect x='7' y='5' width='9' height='12' rx='1.5' fill='%230b0b0c'/%3E%3C/svg%3E"),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='42'%3E%3Crect x='7' y='25' width='9' height='12' rx='1.5' fill='%230b0b0c'/%3E%3C/svg%3E");
+  }
+  .step {
+    grid-template-columns: minmax(0, 1fr);
+    margin: 0 calc(var(--frame-gap) / 2);
+    padding: 18px 18px 22px;
+  }
+  .step-n {
+    align-self: start;
+  }
+  .step-t {
+    margin-top: 14px;
+  }
+  .step-b {
+    grid-column: 1;
+    margin-top: 8px;
+  }
+}
+@media (min-width: 900px) {
+  .steps {
+    padding-top: 160px;
   }
 }
 

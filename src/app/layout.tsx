@@ -25,7 +25,7 @@ const martian = localFont({
 const siteUrl = "https://www.brunosimone.dev";
 const title = "Bruno Simone · Video editor";
 const description =
-  "Video editor. Every project gets a style of its own (grade, type, subtitles, sound), held in every piece, with the decisions behind it explained.";
+  "Video editor for brands and creators: short-form and YouTube edits with captions, motion graphics, color and sound.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
