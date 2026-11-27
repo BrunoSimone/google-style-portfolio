@@ -81,6 +81,10 @@ a {
   outline: 2px solid var(--color-bone);
   outline-offset: 3px;
 }
+/* a section the bar glided to takes focus so the keyboard carries on from there; no ring on it */
+section[tabindex="-1"]:focus {
+  outline: none;
+}
 
 /* Martian Mono: only for real data (edge numbers, timecodes, frame numbers). */
 .edge-type {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import gsap from "gsap";
@@ -18,6 +18,25 @@ const NAV = [
  * cut since 25/11), goes home; the links are Work · Contact (Bruno, 24/11; /about removed 26/11: the home is the video landing, Work
  * goes down to its projects).
  */
+/**
+ * Work and Contact glide to their section when it is on this page (Bruno, 27/11): a smooth scroll
+ * (instant under reduced motion) that stops under the bar (scroll-margin-top), the address takes
+ * the hash, and focus moves to the section so the keyboard carries on from there. When the section
+ * is not on this page (Work from /web), the link navigates as usual.
+ */
+function glideTo(e: MouseEvent<HTMLAnchorElement>, href: string) {
+  if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+  const id = href.split("#")[1];
+  const el = id ? document.getElementById(id) : null;
+  if (!el) return;
+  e.preventDefault();
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  if (location.hash !== `#${id}`) history.pushState(null, "", `#${id}`);
+  if (!el.hasAttribute("tabindex")) el.setAttribute("tabindex", "-1");
+  el.focus({ preventScroll: true });
+}
+
 export function SiteBar() {
   const pathname = usePathname();
   const home = pathname === "/";
@@ -59,7 +78,6 @@ export function SiteBar() {
     };
   }, [pathname]);
 
-
   return (
     <header className="site-bar fixed inset-x-0 top-0 z-30 h-[var(--bar-h)] bg-ink">
       <div className="flex h-full items-center justify-between px-[var(--gutter)]">
@@ -86,11 +104,16 @@ export function SiteBar() {
               return (
                 <li key={item.href}>
                   {item.href.startsWith("/") ? (
-                    <Link href={item.href} className={cls} aria-current={current ? "page" : undefined}>
+                    <Link
+                      href={item.href}
+                      className={cls}
+                      aria-current={current ? "page" : undefined}
+                      onClick={(e) => glideTo(e, item.href)}
+                    >
                       {item.label}
                     </Link>
                   ) : (
-                    <a href={item.href} className={cls}>
+                    <a href={item.href} className={cls} onClick={(e) => glideTo(e, item.href)}>
                       {item.label}
                     </a>
                   )}
